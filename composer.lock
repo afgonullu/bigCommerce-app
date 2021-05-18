@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0765a493a7ddb91587857c885899805b",
+    "content-hash": "f71b829947a26968442edf655f158536",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,62 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "bigcommerce/api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bigcommerce/bigcommerce-api-php.git",
+                "reference": "18a5ca8a136e209573d7ab0f4d35e9e37e51a6c8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bigcommerce/bigcommerce-api-php/zipball/18a5ca8a136e209573d7ab0f4d35e9e37e51a6c8",
+                "reference": "18a5ca8a136e209573d7ab0f4d35e9e37e51a6c8",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~3.0 || ~5.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "codeless/jugglecode": "1.0",
+                "friendsofphp/php-cs-fixer": "^2.13",
+                "php-coveralls/php-coveralls": "2.1",
+                "phpunit/phpunit": "^6.4 || ^7.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Bigcommerce": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bigcommerce",
+                    "homepage": "http://www.bigcommerce.com"
+                }
+            ],
+            "description": "Enables PHP applications to communicate with the Bigcommerce API.",
+            "homepage": "http://developer.bigcommerce.com",
+            "keywords": [
+                "api",
+                "business",
+                "ecommerce",
+                "http",
+                "rest"
+            ],
+            "support": {
+                "issues": "https://github.com/bigcommerce/bigcommerce-api-php/issues",
+                "source": "https://github.com/bigcommerce/bigcommerce-api-php/tree/master"
+            },
+            "time": "2021-01-13T18:19:35+00:00"
         },
         {
             "name": "brick/math",
@@ -479,6 +535,60 @@
                 "source": "https://github.com/fideloper/TrustedProxy/tree/4.4.1"
             },
             "time": "2020-10-22T13:48:01+00:00"
+        },
+        {
+            "name": "firebase/php-jwt",
+            "version": "v5.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
+                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8 <=9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "keywords": [
+                "jwt",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/firebase/php-jwt/issues",
+                "source": "https://github.com/firebase/php-jwt/tree/v5.2.1"
+            },
+            "time": "2021-02-12T00:02:00+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -1710,6 +1820,89 @@
                 "source": "https://github.com/opis/closure/tree/3.6.2"
             },
             "time": "2021-04-09T13:42:10+00:00"
+        },
+        {
+            "name": "oseintow/laravel-bigcommerce",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/palpalani/laravel-bigcommerce.git",
+                "reference": "a32d61944b2c681faaa5bd03ca70fbc57e9c5073"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/palpalani/laravel-bigcommerce/zipball/a32d61944b2c681faaa5bd03ca70fbc57e9c5073",
+                "reference": "a32d61944b2c681faaa5bd03ca70fbc57e9c5073",
+                "shasum": ""
+            },
+            "require": {
+                "bigcommerce/api": "dev-master",
+                "illuminate/support": "^5.6|^6.0|^7.0|^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.13",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^4.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Oseintow\\Bigcommerce\\BigcommerceServiceProvider"
+                    ],
+                    "aliases": {
+                        "Bigcommerce": "Oseintow\\Bigcommerce\\Facades\\Bigcommerce"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Oseintow\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Oseintow\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "psalm": [
+                    "vendor/bin/psalm"
+                ],
+                "test": [
+                    "vendor/bin/phpunit --colors=always"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "michael osei ntow",
+                    "email": "oseintow@gmail.com"
+                },
+                {
+                    "name": "palPalani",
+                    "email": "palani.p@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel BigCommerce package",
+            "support": {
+                "source": "https://github.com/palpalani/laravel-bigcommerce/tree/master"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/palpalani"
+                }
+            ],
+            "time": "2021-03-20T07:03:15+00:00"
         },
         {
             "name": "phpoption/phpoption",
