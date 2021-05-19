@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/{url?}', function () {
     return view('index');
 })->where('', 'list');
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('install', [AppController::class, "install"]);
+
+    Route::get('load', [AppController::class, "load"]);
+
+    Route::get('uninstall', function () {
+        echo 'uninstall';
+        return app()->version();
+    });
+
+    Route::get('remove-user', function () {
+        echo 'remove-user';
+        return app()->version();
+    });
+});
