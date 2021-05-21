@@ -215,7 +215,7 @@ class AppController extends Controller
     }
 
     $client = new Client();
-    $result = $client->request($request->method(), 'https://api.bigcommerce.com/stores/' . $this->getStoreHash($request) . '/' . $endpoint, $requestConfig);
+    $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->getStoreHash($request) . '/' . $endpoint, $requestConfig);
     return $result;
   }
 
