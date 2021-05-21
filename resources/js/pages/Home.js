@@ -1,32 +1,61 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ApiService } from "../../services/ApiService";
+import { Box, Flex, H1, H4, Panel } from "@bigcommerce/big-design";
+import styled from "styled-components";
+import Loading from "../components/Loading";
+import Header from "../components/Header";
 
 const Home = () => {
+    const [summary, setSummary] = useState(null);
+
     useEffect(async () => {
-        const data = await ApiService.getSummary();
-        console.log(data);
-    });
+        const { data } = await ApiService.getSummary();
+        setSummary(data.data);
+    }, []);
+
+    if (!summary) return <Loading />;
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Home Page</div>
-
-                        <div className="card-body">This is the Home Page.</div>
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <div className="card">
-                        <div className="card-header">Side Bar</div>
-
-                        <div className="card-body">This is a Side Bar.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <Header />
+            <Panel header="Homepage">
+                <Flex>
+                    <StyledBox
+                        border="box"
+                        borderRadius="normal"
+                        marginRight="xLarge"
+                        padding="medium"
+                    >
+                        <H4>Inventory count</H4>
+                        <H1 marginBottom="none">{summary.inventory_count}</H1>
+                    </StyledBox>
+                    <StyledBox
+                        border="box"
+                        borderRadius="normal"
+                        marginRight="xLarge"
+                        padding="medium"
+                    >
+                        <H4>Variant count</H4>
+                        <H1 marginBottom="none">{summary.variant_count}</H1>
+                    </StyledBox>
+                    <StyledBox
+                        border="box"
+                        borderRadius="normal"
+                        padding="medium"
+                    >
+                        <H4>Primary category</H4>
+                        <H1 marginBottom="none">
+                            {summary.primary_category_name}
+                        </H1>
+                    </StyledBox>
+                </Flex>
+            </Panel>
+        </>
     );
 };
+
+const StyledBox = styled(Box)`
+    min-width: 10rem;
+`;
 
 export default Home;
