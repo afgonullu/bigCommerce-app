@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { ApiService } from "../../services/ApiService";
 
 const Home = () => {
+    useEffect(async () => {
+        const data = await ApiService.getSummary();
+        console.log(data);
+    });
+
     return (
         <div className="container">
             <div className="row">

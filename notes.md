@@ -39,3 +39,6 @@
    `sail artisan publish` -> generates a bigcommerce.php in config. add env. keys to bigcommerce.php
 
     check commit "basic configuration, routes and controller"
+
+https://www.dckap.com/blog/create-an-app-in-bigcommerce-using-laravel/
+https://medium.com/bigcommerce-developer-blog/building-a-bigcommerce-app-using-laravel-and-react-711ceceb5006

@@ -33,3 +33,6 @@ Route::group(['prefix' => 'auth'], function () {
         return app()->version();
     });
 });
+
+Route::any('/bc-api/{endpoint}', [AppController::class, "proxyBigCommerceAPIRequest"])
+    ->where('endpoint', 'v2\/.*|v3\/.*');
