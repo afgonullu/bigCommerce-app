@@ -2,6 +2,17 @@
 
 return [
 
+    'appEnv' => env('APP_ENV', 'production'),
+    'appUrl' => env('APP_URL'),
+    'clientId' => env('CLIENT_ID'),
+    'clientSecret' => env('CLIENT_SECRET'),
+    'authCallback' => env('AUTH_CALLBACK'),
+    'localAccessToken' => env('L_ACCESS_TOKEN'),
+    'localApiPath' => env('L_API_PATH'),
+    'localClientId' => env('L_CLIENT_ID'),
+    'localClientSecret' => env('L_CLIENT_SECRET'),
+    'localStoreHash' => env('L_STORE_HASH'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
