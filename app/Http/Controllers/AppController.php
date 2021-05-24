@@ -84,11 +84,16 @@ class AppController extends Controller
       echo "hello";
       $verifiedSignedRequestData = $this->verifySignedRequest($signedPayload);
       if ($verifiedSignedRequestData !== null) {
+        echo "positive return";
+
         $request->session()->put('user_id', $verifiedSignedRequestData['user']['id']);
         $request->session()->put('user_email', $verifiedSignedRequestData['user']['email']);
         $request->session()->put('owner_id', $verifiedSignedRequestData['owner']['id']);
         $request->session()->put('owner_email', $verifiedSignedRequestData['owner']['email']);
         $request->session()->put('store_hash', $verifiedSignedRequestData['context']);
+        echo $request->session()->get('store_hash');
+        $this->storehash = $verifiedSignedRequestData['context'];
+        echo '   store hash is at the moment : ' . $this->storehash . '      .....';
       } else {
         return "The signed request from BigCommerce could not be validated.";
         // return redirect()->action([AppController::class, 'error'])->with('error_message', 'The signed request from BigCommerce could not be validated.');
@@ -182,8 +187,6 @@ class AppController extends Controller
   public function verifySignedRequest($signedRequest)
   {
     list($encodedData, $encodedSignature) = explode('.', $signedRequest, 2);
-    echo $encodedData;
-    echo $encodedSignature;
 
     // decode the data
     $signature = base64_decode($encodedSignature);
@@ -202,6 +205,8 @@ class AppController extends Controller
 
   public function makeBigCommerceAPIRequest(Request $request, $endpoint)
   {
+    echo ' ...... trying to make an apiRequest now     : with storehash    : ' . $this->storehash . '    .............';
+
     $requestConfig = [
       'headers' => [
         'X-Auth-Client' => $this->getAppClientId(),
@@ -214,8 +219,10 @@ class AppController extends Controller
       $requestConfig['body'] = $request->getContent();
     }
 
+
+
     $client = new Client();
-    $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->getStoreHash($request) . '/' . $endpoint, $requestConfig);
+    $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->storehash . '/' . $endpoint, $requestConfig);
     return $result;
   }
 
@@ -225,6 +232,8 @@ class AppController extends Controller
       // For v2 endpoints, add a .json to the end of each endpoint, to normalize against the v3 API standards
       $endpoint .= '.json';
     }
+
+    echo ' asadssada ...... trying to make an apiRequest now     : with storehash    : ' . $this->storehash . '    .............' . $request->session()->get('store_hash') . '    ............        ';
 
     $result = $this->makeBigCommerceAPIRequest($request, $endpoint);
 
