@@ -206,6 +206,8 @@ class AppController extends Controller
   public function makeBigCommerceAPIRequest(Request $request, $endpoint)
   {
     echo ' ...... trying to make an apiRequest now     : with storehash    : ' . $this->storehash . '    .............';
+    echo '...........................................';
+    echo 'other variables at the moment :::: ............... client ID :' . $this->getAppClientId() . '...................... token : ' . $this->getAccessToken($request) . '...............';
 
     $requestConfig = [
       'headers' => [
