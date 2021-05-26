@@ -3,23 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use mysql_xdevapi\Exception;
 use Oseintow\Bigcommerce\Bigcommerce;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use Bigcommerce\Api\Client as BigcommerceClient;
-use Illuminate\Support\Facades\Storage;
-use App\Config;  //Database Connection
-use Bigcommerce\Api\Connection;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class AppController extends Controller
 {
   protected $bigcommerce;
   private $client_id;
   private $client_secret;
-  private $access_token;
-  private $storehash;
   private $redirect_uri;
 
   public function __construct(Bigcommerce $bigcommerce)
@@ -53,7 +47,10 @@ class AppController extends Controller
     if (\config('app.appEnv') === 'local') {
       return \config('app.localAccessToken');
     } else {
-      return $request->session()->get('access_token');
+      $store = DB::table('app_users')
+        ->where('store_hash', '=', $request->session()->get('store_hash'))
+        ->get();
+      return Arr::first($store)->access_token;
     }
   }
 
@@ -81,19 +78,14 @@ class AppController extends Controller
   {
     $signedPayload = $request->get('signed_payload');
     if (!empty($signedPayload)) {
-      echo "hello";
       $verifiedSignedRequestData = $this->verifySignedRequest($signedPayload);
       if ($verifiedSignedRequestData !== null) {
-        echo "positive return";
 
         $request->session()->put('user_id', $verifiedSignedRequestData['user']['id']);
         $request->session()->put('user_email', $verifiedSignedRequestData['user']['email']);
         $request->session()->put('owner_id', $verifiedSignedRequestData['owner']['id']);
         $request->session()->put('owner_email', $verifiedSignedRequestData['owner']['email']);
         $request->session()->put('store_hash', $verifiedSignedRequestData['context']);
-        echo $request->session()->get('store_hash');
-        $this->storehash = $verifiedSignedRequestData['context'];
-        echo '   store hash is at the moment : ' . $this->storehash . '      .....';
       } else {
         return "The signed request from BigCommerce could not be validated.";
         // return redirect()->action([AppController::class, 'error'])->with('error_message', 'The signed request from BigCommerce could not be validated.');
@@ -137,20 +129,19 @@ class AppController extends Controller
         $request->session()->put('user_id', $data['user']['id']);
         $request->session()->put('user_email', $data['user']['email']);
 
-        // $configValue = Config::select('*')->where('storehash', $data['context'])->get()->toArray();
+        $store = DB::table('app_users')
+          ->where('store_hash', '=', $data['context'])
+          ->get();
 
-        // if (count($configValue) != 0) {
-        //   $id = $configValue[0]['id'];
-        //   $configObj = Config::find($id);
-        //   $configObj->access_token = $data['access_token'];
-        //   $configObj->save();
-        // } else {
-        //   $configObj = new Config;
-        //   $configObj->email = $data['user']['email'];
-        //   $configObj->storehash = $data['context'];
-        //   $configObj->access_token = $data['access_token'];
-        //   $configObj->save();
-        // }
+        if (count($store) > 0) {
+          $ref = DB::table('app_users')->where('store_hash', '=', $data['context'])->update(
+            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email']]
+          );
+        } else {
+          $ref = DB::table('app_users')->insert(
+            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email']]
+          );
+        }
 
         // If the merchant installed the app via an external link, redirect back to the 
         // BC installation success page for this app
@@ -160,9 +151,9 @@ class AppController extends Controller
       }
 
       return redirect(\config('app.appUrl'));
+      // return redirect('/');
     } catch (RequestException $e) {
       $statusCode = $e->getResponse()->getStatusCode();
-      echo $statusCode;
       $errorMessage = "An error occurred.";
 
       if ($e->hasResponse()) {
@@ -191,7 +182,6 @@ class AppController extends Controller
     // decode the data
     $signature = base64_decode($encodedSignature);
     $jsonStr = base64_decode($encodedData);
-    echo $jsonStr;
     $data = json_decode($jsonStr, true);
 
     // confirm the signature
@@ -205,10 +195,6 @@ class AppController extends Controller
 
   public function makeBigCommerceAPIRequest(Request $request, $endpoint)
   {
-    echo ' ...... trying to make an apiRequest now     : with storehash    : ' . $this->storehash . '    .............';
-    echo '...........................................';
-    echo 'other variables at the moment :::: ............... client ID :' . $this->getAppClientId() . '...................... token : ' . $this->getAccessToken($request) . '...............';
-
     $requestConfig = [
       'headers' => [
         'X-Auth-Client' => $this->getAppClientId(),
@@ -221,10 +207,8 @@ class AppController extends Controller
       $requestConfig['body'] = $request->getContent();
     }
 
-
-
     $client = new Client();
-    $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->storehash . '/' . $endpoint, $requestConfig);
+    $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->getStoreHash($request) . '/' . $endpoint, $requestConfig);
     return $result;
   }
 
@@ -234,8 +218,6 @@ class AppController extends Controller
       // For v2 endpoints, add a .json to the end of each endpoint, to normalize against the v3 API standards
       $endpoint .= '.json';
     }
-
-    echo ' asadssada ...... trying to make an apiRequest now     : with storehash    : ' . $this->storehash . '    .............' . $request->session()->get('store_hash') . '    ............        ';
 
     $result = $this->makeBigCommerceAPIRequest($request, $endpoint);
 

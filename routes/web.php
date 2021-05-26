@@ -16,7 +16,7 @@ use App\Http\Controllers\AppController;
 
 Route::get('/{url?}', function () {
     return view('index');
-})->where('', 'list');
+})->where('', 'products');
 
 Route::group(['prefix' => 'auth'], function () {
     Route::get('install', [AppController::class, "install"]);

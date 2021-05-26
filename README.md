@@ -12,9 +12,11 @@
 5. Copy .env-example to `.env`.
 6. [Replace client_id and client_secret in .env](https://devtools.bigcommerce.com/my/apps) (from `View Client ID` in the dev portal).
 7. Update APP_URL and AUTH_CALLBACK in `.env` with the `ngrok_id` from step 5.
-8. `sail up` or `./vendor/bin/sail up` to run Laravel project.
-9. If for some reason env variables change, clear env cache with command: `sail artisan config:cache`
-10. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
+8. To initialize database tables, run `sail artisan migrate`
+9. `sail up` or `./vendor/bin/sail up` to run Laravel project.
+10. If for some reason env variables change, clear env cache with command: `sail artisan config:cache`
+11. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
+12. App uses cookie based session to pass over some data, also a mysql database configured in the laravel sail project to store access tokens for registered stores. access tokens currently are not hashed in the database.
 
 ### Notes
 
