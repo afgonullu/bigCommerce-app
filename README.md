@@ -18,11 +18,14 @@
 11. [Install the app and launch.](https://developer.bigcommerce.com/api-docs/apps/quick-start#install-the-app)
 12. App uses cookie based session to pass over some data, also a mysql database configured in the laravel sail project to store access tokens for registered stores. access tokens currently are not hashed in the database.
 
-### Notes
+### Notes on Local Development
 
--   When running the app outside of BigCommerce, setting the follow environment variable will cause the app to use the local API credential (also in the .env file):
-    `APP_ENV=local`
--   Also set local store API credentials in the .env (routes as in the example)
+-   For faster development in local machine, you can use local credentials. For that, you should set the following `APP_ENV` environment variable to `local`. This will cause the app to use the local API credentials:  
+    e.g. `APP_ENV=local`
+
+-   In order to work in local, you should also set store API credentials in the .env. You can generate API credentials in your store dashboard `Advanced Settings->API Accounts->Create V2/V3 API Token` (You need to select Information&Settings scope readonly and other scopes that you need for your app's functionality)
+
+Below is an example of how these environment variables should look like.
 
 ```
 # LOCAL
