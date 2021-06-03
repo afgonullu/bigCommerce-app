@@ -34,6 +34,28 @@ For other development environments, refer to official Laravel, PHP and mysql doc
 12. If for some reason (such as new ngrok forwarding address etc.) you need to change env variables, clear env cache with command on a seperate terminal: `./vendor/bin/sail artisan config:cache`
 13. App uses cookie based session to pass over some data, also a mysql database configured in the laravel sail project to store access tokens for registered stores. access tokens currently are not hashed in the database.
 
+## Troubleshooting
+
+If you run into trouble with your Laravel Docker Configuration, you can start from scratch by following these steps:
+
+1. Remove all images and containers
+
+```
+./vendor/bin/sail down --rmi all -v
+```
+
+2. Recreate containers and start each one
+
+```
+./vendor/bin/sail up
+```
+
+3. Initialize Database
+
+```
+./vendor/bin/sail artisan migrate
+```
+
 ### Notes on Local Development
 
 -   For faster development in local machine, you can use local credentials. For that, you should set the following `APP_ENV` environment variable to `local`. This will cause the app to use the local API credentials:  
