@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Oseintow\Bigcommerce\Bigcommerce;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 
@@ -71,7 +72,7 @@ class AppController extends Controller
       $errorMessage = $request->session()->get('error_message');
     }
 
-    echo '<h4>An issue has occurred:</h4> <p>' . $errorMessage . '</p> <a href="' . $this->baseURL . '">Go back to home</a>';
+    echo '<h4>An issue has occurred:</h4> <p>' . $errorMessage . '</p> <a href="' . \config('app.appUrl') . '">Go back to home</a>';
   }
 
   public function load(Request $request)
@@ -103,7 +104,7 @@ class AppController extends Controller
     // Make sure all required query params have been passed
     if (!$request->has('code') || !$request->has('scope') || !$request->has('context')) {
       echo 'Not enough information was passed to install this app.';
-      // return redirect()->action('MainController@error')->with('error_message', 'Not enough information was passed to install this app.');
+      // return redirect()->action([AppController::class, 'error'])->with('error_message', 'Not enough information was passed to install this app.');
     }
 
     try {
@@ -158,8 +159,9 @@ class AppController extends Controller
 
       if ($e->hasResponse()) {
         if ($statusCode != 500) {
-          echo "some error other than 500";
-          // $errorMessage = Psr7\str($e->getResponse());
+          // echo "some error other than 500";
+          // var_dump($e->getResponse());
+          $errorMessage = Message::toString($e->getResponse());
         }
       }
 
@@ -168,8 +170,8 @@ class AppController extends Controller
       if ($request->has('external_install')) {
         return redirect('https://login.bigcommerce.com/app/' . $this->getAppClientId() . '/install/failed');
       } else {
-        echo "fail";
-        // return redirect()->action('MainController@error')->with('error_message', $errorMessage);
+        echo $errorMessage;
+        // return redirect()->action([AppController::class, 'error'])->with('error_message', $errorMessage);
       }
     }
     // return view('index');

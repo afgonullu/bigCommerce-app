@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { ApiService } from "../../services/ApiService";
+import { ApiService } from "../services/ApiService";
 import { Box, Flex, H1, H4, Panel } from "@bigcommerce/big-design";
 import styled from "styled-components";
 import Loading from "../components/Loading";
 import Header from "../components/Header";
+import { Summary } from "../interfaces/interfaces";
 
 const Home = () => {
-    const [summary, setSummary] = useState(null);
+    const [summary, setSummary] = useState<Summary>();
 
-    useEffect(async () => {
-        const { data } = await ApiService.getSummary();
-        setSummary(data.data);
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await ApiService.getSummary();
+            setSummary(data.data);
+        };
+        fetchData();
     }, []);
 
     if (!summary) return <Loading />;

@@ -47,7 +47,7 @@ const Header = () => {
         { id: TabIds.PRODUCTS, title: "Products" },
     ];
 
-    const handleTabClick = (tabId) => {
+    const handleTabClick = (tabId: string) => {
         setActiveTab(tabId);
 
         return router.push(TabRoutes[tabId]);

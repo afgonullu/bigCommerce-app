@@ -8,45 +8,51 @@ import {
 } from "@bigcommerce/big-design";
 import { MoreHorizIcon } from "@bigcommerce/big-design-icons";
 import { Link, useHistory } from "react-router-dom";
-import { ApiService } from "../../services/ApiService";
+import { ApiService } from "../services/ApiService";
 import Loading from "../components/Loading";
 import Header from "../components/Header";
+import { TableItem } from "../interfaces/interfaces";
 
 const Products = () => {
     const router = useHistory();
-    const [products, setProducts] = useState(null);
+    const [products, setProducts] = useState<TableItem[]>([]);
 
-    useEffect(async () => {
-        const { data } = await ApiService.getProducts();
-        const tableItems = data.data.map(
-            ({ id, inventory_level: stock, name, price }) => ({
-                id,
-                name,
-                price,
-                stock,
-            })
-        );
-        setProducts(tableItems);
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await ApiService.getProducts();
+            const tableItems = data.data.map(
+                ({ id, inventory_level, name, price }: TableItem) => ({
+                    id,
+                    name,
+                    price,
+                    inventory_level,
+                })
+            );
+            setProducts(tableItems);
+        };
+        fetchData();
     }, []);
 
-    const renderName = (id, name) => <Link to={`/products/${id}`}>{name}</Link>;
+    const renderName = (id: number, name: string) => (
+        <Link to={`/products/${id}`}>{name}</Link>
+    );
 
-    const renderPrice = (price) =>
+    const renderPrice = (price: number) =>
         new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "USD",
         }).format(price);
 
-    const renderStock = (stock) =>
-        stock > 0 ? (
-            <Small>{stock}</Small>
+    const renderStock = (inventory_level: number) =>
+        inventory_level > 0 ? (
+            <Small>{inventory_level}</Small>
         ) : (
             <Small bold marginBottom="none" color="danger">
                 0
             </Small>
         );
 
-    const renderAction = (id) => (
+    const renderAction = (id: number) => (
         <Dropdown
             items={[
                 {
@@ -83,9 +89,10 @@ const Products = () => {
                         },
                         {
                             header: "Stock",
-                            hash: "stock",
-                            render: ({ stock }) => renderStock(stock),
-                            sortKey: "stock",
+                            hash: "inventory_level",
+                            render: ({ inventory_level }) =>
+                                renderStock(inventory_level),
+                            sortKey: "inventory_level",
                         },
                         {
                             header: "Price",

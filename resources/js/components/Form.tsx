@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
     Button,
     Checkbox,
@@ -10,53 +10,62 @@ import {
     Form as StyledForm,
     Textarea,
 } from "@bigcommerce/big-design";
+import { FormData } from "../interfaces/interfaces";
 
-const FormErrors = {
-    name: "Product name is required",
-    price: "Default price is required",
-};
+// const FormErrors = {
+//     name: "Product name is required",
+//     price: "Default price is required",
+// };
 
-const Form = ({ formData, onCancel, onSubmit }) => {
+interface FormProps {
+    formData: FormData;
+    onCancel(): void;
+    onSubmit(form: FormData): void;
+}
+
+const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
     const { description, isVisible, name, price, type } = formData;
-    const [form, setForm] = useState({
+    const [form, setForm] = useState<FormData>({
         description,
         isVisible,
         name,
         price,
         type,
     });
-    const [errors, setErrors] = useState({});
+    // const [errors, setErrors] = useState<StringKeyValue>({});
 
-    const handleChange = (event) => {
+    const handleChange = (
+        event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
         const { name: formName, value } = event?.target;
         setForm((prevForm) => ({ ...prevForm, [formName]: value }));
 
-        // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
-        !value && FormErrors[formName]
-            ? setErrors((prevErrors) => ({
-                  ...prevErrors,
-                  [formName]: FormErrors[formName],
-              }))
-            : setErrors(({ [formName]: removed, ...prevErrors }) => ({
-                  ...prevErrors,
-              }));
+        // // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
+        // !value && FormErrors[formName]
+        //     ? setErrors((prevErrors) => ({
+        //           ...prevErrors,
+        //           [formName]: FormErrors[formName],
+        //       }))
+        //     : setErrors(({ [formName]: removed, ...prevErrors }) => ({
+        //           ...prevErrors,
+        //       }));
     };
 
-    const handleSelectChange = (value) => {
+    const handleSelectChange = (value: string) => {
         setForm((prevForm) => ({ ...prevForm, type: value }));
     };
 
-    const handleCheckboxChange = (event) => {
+    const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { checked, name: formName } = event?.target;
         setForm((prevForm) => ({ ...prevForm, [formName]: checked }));
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent<EventTarget>) => {
         event.preventDefault();
 
-        // If there are errors, do not submit the form
-        const hasErrors = Object.keys(errors).length > 0;
-        if (hasErrors) return;
+        // // If there are errors, do not submit the form
+        // const hasErrors = Object.keys(errors).length > 0;
+        // if (hasErrors) return;
 
         onSubmit(form);
     };
@@ -66,7 +75,7 @@ const Form = ({ formData, onCancel, onSubmit }) => {
             <Panel header="Basic Information">
                 <FormGroup>
                     <Input
-                        error={errors?.name}
+                        // error={errors?.name}
                         label="Product name"
                         name="name"
                         required
@@ -89,7 +98,7 @@ const Form = ({ formData, onCancel, onSubmit }) => {
                 </FormGroup>
                 <FormGroup>
                     <Input
-                        error={errors?.price}
+                        // error={errors?.price}
                         iconLeft={"$"}
                         label="Default price (excluding tax)"
                         name="price"
