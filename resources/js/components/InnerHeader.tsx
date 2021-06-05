@@ -5,7 +5,7 @@ import { TabIds, TabRoutes } from "./Header";
 import { Box, Button, H1, HR, Text } from "@bigcommerce/big-design";
 import { ArrowBackIcon } from "@bigcommerce/big-design-icons";
 
-const InnerHeader = () => {
+const InnerHeader: React.FC = () => {
     const router = useHistory();
     let { id } = useParams<{ id: string }>();
     const [name, setName] = useState("");

@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Loading from "../components/Loading";
 import { FormData } from "../interfaces/interfaces";
 
-const ProductDetails = () => {
+const ProductDetails: React.FC = () => {
     const router = useHistory();
     let { id } = useParams<{ id: string }>();
     const [formData, setFormData] = useState<FormData>();

@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 
-const App = () => {
+const App: React.FC = () => {
     return (
         <>
             <GlobalStyles />

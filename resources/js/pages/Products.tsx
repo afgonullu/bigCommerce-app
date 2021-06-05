@@ -13,7 +13,7 @@ import Loading from "../components/Loading";
 import Header from "../components/Header";
 import { TableItem } from "../interfaces/interfaces";
 
-const Products = () => {
+const Products: React.FC = () => {
     const router = useHistory();
     const [products, setProducts] = useState<TableItem[]>([]);
 
@@ -69,9 +69,6 @@ const Products = () => {
             }
         />
     );
-
-    // if (isLoading) return <Loading />;
-    // if (isError) return <ErrorMessage />;
 
     if (!products) return <Loading />;
 

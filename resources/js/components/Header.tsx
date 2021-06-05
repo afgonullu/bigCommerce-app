@@ -20,7 +20,7 @@ const HeaderTypes = {
     INNER: "inner",
 };
 
-const Header = () => {
+const Header: React.FC = () => {
     const match = useRouteMatch();
     const router = useHistory();
     const [activeTab, setActiveTab] = useState("");

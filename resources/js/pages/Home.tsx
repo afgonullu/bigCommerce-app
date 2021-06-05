@@ -6,7 +6,7 @@ import Loading from "../components/Loading";
 import Header from "../components/Header";
 import { Summary } from "../interfaces/interfaces";
 
-const Home = () => {
+const Home: React.FC = () => {
     const [summary, setSummary] = useState<Summary>();
 
     useEffect(() => {
