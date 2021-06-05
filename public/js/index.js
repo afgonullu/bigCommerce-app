@@ -22796,6 +22796,8 @@ react_dom_1["default"].render(react_1["default"].createElement(App, null), docum
 "use strict";
 
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 var __assign = this && this.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -22846,6 +22848,19 @@ var __importStar = this && this.__importStar || function (mod) {
   return result;
 };
 
+var __rest = this && this.__rest || function (s, e) {
+  var t = {};
+
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
@@ -22853,6 +22868,11 @@ Object.defineProperty(exports, "__esModule", ({
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
 var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var FormErrors = {
+  name: "Product name is required",
+  price: "Default price is required"
+};
 
 var Form = function Form(_a) {
   var formData = _a.formData,
@@ -22872,8 +22892,11 @@ var Form = function Form(_a) {
     type: type
   }),
       form = _b[0],
-      setForm = _b[1]; // const [errors, setErrors] = useState<StringKeyValue>({});
+      setForm = _b[1];
 
+  var _c = react_1.useState({}),
+      errors = _c[0],
+      setErrors = _c[1];
 
   var handleChange = function handleChange(event) {
     var _a = event === null || event === void 0 ? void 0 : event.target,
@@ -22884,15 +22907,19 @@ var Form = function Form(_a) {
       var _a;
 
       return __assign(__assign({}, prevForm), (_a = {}, _a[formName] = value, _a));
-    }); // // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
-    // !value && FormErrors[formName]
-    //     ? setErrors((prevErrors) => ({
-    //           ...prevErrors,
-    //           [formName]: FormErrors[formName],
-    //       }))
-    //     : setErrors(({ [formName]: removed, ...prevErrors }) => ({
-    //           ...prevErrors,
-    //       }));
+    }); // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
+
+    !value && FormErrors[formName] ? setErrors(function (prevErrors) {
+      var _a;
+
+      return __assign(__assign({}, prevErrors), (_a = {}, _a[formName] = FormErrors[formName], _a));
+    }) : setErrors(function (_a) {
+      var _b = formName,
+          removed = _a[_b],
+          prevErrors = __rest(_a, [_typeof(_b) === "symbol" ? _b : _b + ""]);
+
+      return __assign({}, prevErrors);
+    });
   };
 
   var handleSelectChange = function handleSelectChange(value) {
@@ -22916,10 +22943,10 @@ var Form = function Form(_a) {
   };
 
   var handleSubmit = function handleSubmit(event) {
-    event.preventDefault(); // // If there are errors, do not submit the form
-    // const hasErrors = Object.keys(errors).length > 0;
-    // if (hasErrors) return;
+    event.preventDefault(); // If there are errors, do not submit the form
 
+    var hasErrors = Object.keys(errors).length > 0;
+    if (hasErrors) return;
     onSubmit(form);
   };
 
@@ -22927,9 +22954,8 @@ var Form = function Form(_a) {
     onSubmit: handleSubmit
   }, react_1["default"].createElement(big_design_1.Panel, {
     header: "Basic Information"
-  }, react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input // error={errors?.name}
-  , {
-    // error={errors?.name}
+  }, react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input, {
+    error: errors === null || errors === void 0 ? void 0 : errors.name,
     label: "Product name",
     name: "name",
     required: true,
@@ -22948,9 +22974,8 @@ var Form = function Form(_a) {
     required: true,
     value: form.type,
     onOptionChange: handleSelectChange
-  })), react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input // error={errors?.price}
-  , {
-    // error={errors?.price}
+  })), react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input, {
+    error: errors === null || errors === void 0 ? void 0 : errors.price,
     iconLeft: "$",
     label: "Default price (excluding tax)",
     name: "price",
@@ -24314,9 +24339,7 @@ var Products = function Products() {
         variant: "subtle"
       })
     });
-  }; // if (isLoading) return <Loading />;
-  // if (isError) return <ErrorMessage />;
-
+  };
 
   if (!products) return react_1["default"].createElement(Loading_1["default"], null);
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(Header_1["default"], null), react_1["default"].createElement(big_design_1.Panel, null, react_1["default"].createElement(big_design_1.StatefulTable, {
