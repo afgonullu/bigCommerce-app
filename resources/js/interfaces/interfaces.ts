@@ -33,3 +33,9 @@ export interface Summary {
     primary_category_id: number;
     primary_category_name: string;
 }
+
+export interface IFormErrors {
+    [key: string]: string;
+    name: string;
+    price: string;
+}

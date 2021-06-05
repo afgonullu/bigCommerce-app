@@ -10,12 +10,16 @@ import {
     Form as StyledForm,
     Textarea,
 } from "@bigcommerce/big-design";
-import { FormData } from "../interfaces/interfaces";
+import {
+    FormData,
+    IFormErrors,
+    StringKeyValue,
+} from "../interfaces/interfaces";
 
-// const FormErrors = {
-//     name: "Product name is required",
-//     price: "Default price is required",
-// };
+const FormErrors: IFormErrors = {
+    name: "Product name is required",
+    price: "Default price is required",
+};
 
 interface FormProps {
     formData: FormData;
@@ -32,7 +36,7 @@ const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
         price,
         type,
     });
-    // const [errors, setErrors] = useState<StringKeyValue>({});
+    const [errors, setErrors] = useState<StringKeyValue>({});
 
     const handleChange = (
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -40,15 +44,15 @@ const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
         const { name: formName, value } = event?.target;
         setForm((prevForm) => ({ ...prevForm, [formName]: value }));
 
-        // // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
-        // !value && FormErrors[formName]
-        //     ? setErrors((prevErrors) => ({
-        //           ...prevErrors,
-        //           [formName]: FormErrors[formName],
-        //       }))
-        //     : setErrors(({ [formName]: removed, ...prevErrors }) => ({
-        //           ...prevErrors,
-        //       }));
+        // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
+        !value && FormErrors[formName]
+            ? setErrors((prevErrors) => ({
+                  ...prevErrors,
+                  [formName]: FormErrors[formName],
+              }))
+            : setErrors(({ [formName]: removed, ...prevErrors }) => ({
+                  ...prevErrors,
+              }));
     };
 
     const handleSelectChange = (value: string) => {
@@ -63,9 +67,9 @@ const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
     const handleSubmit = (event: FormEvent<EventTarget>) => {
         event.preventDefault();
 
-        // // If there are errors, do not submit the form
-        // const hasErrors = Object.keys(errors).length > 0;
-        // if (hasErrors) return;
+        // If there are errors, do not submit the form
+        const hasErrors = Object.keys(errors).length > 0;
+        if (hasErrors) return;
 
         onSubmit(form);
     };
@@ -75,7 +79,7 @@ const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
             <Panel header="Basic Information">
                 <FormGroup>
                     <Input
-                        // error={errors?.name}
+                        error={errors?.name}
                         label="Product name"
                         name="name"
                         required
@@ -98,7 +102,7 @@ const Form: React.FC<FormProps> = ({ formData, onCancel, onSubmit }) => {
                 </FormGroup>
                 <FormGroup>
                     <Input
-                        // error={errors?.price}
+                        error={errors?.price}
                         iconLeft={"$"}
                         label="Default price (excluding tax)"
                         name="price"
