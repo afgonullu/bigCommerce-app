@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ApiService = {
+const ApiService = {
     updateProduct(id: any, data: any) {
         return axios({
             method: "put",
@@ -28,3 +28,5 @@ export const ApiService = {
         });
     },
 };
+
+export default ApiService;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { ApiService } from "../services/ApiService";
+import { ApiService } from "../services/";
 import Form from "../components/Form";
 import Header from "../components/Header";
 import Loading from "../components/Loading";

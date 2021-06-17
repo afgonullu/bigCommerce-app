@@ -8,7 +8,7 @@ import {
 } from "@bigcommerce/big-design";
 import { MoreHorizIcon } from "@bigcommerce/big-design-icons";
 import { Link, useHistory } from "react-router-dom";
-import { ApiService } from "../services/ApiService";
+import { ApiService } from "../services/";
 import Loading from "../components/Loading";
 import Header from "../components/Header";
 import { TableItem } from "../interfaces/interfaces";

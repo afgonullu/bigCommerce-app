@@ -58,6 +58,12 @@ If you run into trouble with your Laravel Docker Configuration, you can start fr
 
 ### Notes on Local Development
 
+-   If you are pulling the new marketing updates (which requires onboards table on the db), don't forget to migrate. Or better yet, setup mysql database from fresh: (use command when sail is up)
+
+```
+./vendor/bin/sail artisan migrate:fresh
+```
+
 -   For faster development in local machine, you can use local credentials. For that, you should set the following `APP_ENV` environment variable to `local`. This will cause the app to use the local API credentials:  
     e.g. `APP_ENV=local`
 

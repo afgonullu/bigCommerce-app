@@ -39,3 +39,20 @@ export interface IFormErrors {
     name: string;
     price: string;
 }
+
+export type OnboardedStatus =
+    | "step_storefront_select"
+    | "step_requirements"
+    | "step_connection"
+    | "step_connection_ready"
+    | "onboarded";
+
+export interface OnboardedState {
+    status: OnboardedStatus;
+    storefrontChannelId?: number;
+    managedChannelId?: number;
+    platformBusinessId?: string;
+    platformAccountId?: string;
+    platformAnalyticsId?: string;
+    platformUserProfile?: string;
+}

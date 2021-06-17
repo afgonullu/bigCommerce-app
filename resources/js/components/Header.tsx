@@ -6,11 +6,13 @@ import InnerHeader from "./InnerHeader";
 export const TabIds = {
     HOME: "home",
     PRODUCTS: "products",
+    ONBOARD: "onboard",
 };
 
 export const TabRoutes = {
     [TabIds.HOME]: "/",
     [TabIds.PRODUCTS]: "/products",
+    [TabIds.ONBOARD]: "/onboard",
 };
 
 const InnerRoutes = ["/products/:id"];
@@ -45,6 +47,7 @@ const Header: React.FC = () => {
     const items = [
         { id: TabIds.HOME, title: "Home" },
         { id: TabIds.PRODUCTS, title: "Products" },
+        { id: TabIds.ONBOARD, title: "Onboard" },
     ];
 
     const handleTabClick = (tabId: string) => {

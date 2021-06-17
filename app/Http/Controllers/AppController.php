@@ -136,11 +136,11 @@ class AppController extends Controller
 
         if (count($store) > 0) {
           $ref = DB::table('app_users')->where('store_hash', '=', $data['context'])->update(
-            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email']]
+            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email'], 'scope' => $data['scope']]
           );
         } else {
           $ref = DB::table('app_users')->insert(
-            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email']]
+            ['user_id' => $data['user']['id'], 'store_hash' => $data['context'], 'access_token' => $data['access_token'], 'user_email' => $data['user']['email'], 'scope' => $data['scope']]
           );
         }
 
@@ -224,5 +224,114 @@ class AppController extends Controller
     $result = $this->makeBigCommerceAPIRequest($request, $endpoint);
 
     return response($result->getBody(), $result->getStatusCode())->header('Content-Type', 'application/json');
+  }
+
+  public function getOnboardedState(Request $request)
+  {
+    $storeHash = $this->getStoreHash($request);
+
+    $currentState = DB::table('onboards')
+      ->where('store_hash', '=', $storeHash)
+      ->get();
+
+    if (count($currentState) === 0) {
+      $currentState = [
+        "store_hash" => $storeHash,
+        "managedChannelId" => -1,
+        "platformAccessToken" => '',
+        "platformAccountId" => '',
+        "platformAnalyticsId" => '',
+        "platformBusinessId" => '',
+        "platformUserProfile" => '',
+        "status" => 'step_storefront_select',
+        "storefrontChannelId" => -1,
+      ];
+    }
+    return response()->json($currentState)->header('Content-Type', 'application/json');
+  }
+
+  public function setOnboardedState(Request $request)
+  {
+    $storeHash = $this->getStoreHash($request);
+
+    $currentState = DB::table('onboards')
+      ->where('store_hash', '=', $storeHash)
+      ->get();
+
+    if (count($currentState) === 0) {
+      $newState = [
+        "store_hash" => $storeHash,
+        "managedChannelId" => -1,
+        "platformAccessToken" => '',
+        "platformAccountId" => '',
+        "platformAnalyticsId" => '',
+        "platformBusinessId" => '',
+        "platformUserProfile" => '',
+        "status" => 'step_storefront_select',
+        "storefrontChannelId" => -1,
+      ];
+    } else {
+      $newState = $currentState[0];
+    }
+
+    if ($request->has('status')) {
+      $newState->status = $request->input('status');
+    }
+
+    if ($request->has('storefrontChannelId')) {
+      $newState->storefrontChannelId = $request->input('storefrontChannelId');
+    }
+
+    if ($request->has('managedChannelId')) {
+      $newState->managedChannelId = $request->input('managedChannelId');
+    }
+
+    if ($request->has('platformBusinessId')) {
+      $newState->platformBusinessId = $request->input('platformBusinessId');
+    }
+
+    DB::table('onboards')->upsert([
+      ["store_hash" => $newState->store_hash, "managedChannelId" => $newState->managedChannelId, "platformAccessToken" => $newState->platformAccessToken, "platformAccountId" => $newState->platformAccountId, "platformAnalyticsId" => $newState->platformAnalyticsId, "platformBusinessId" => $newState->platformBusinessId, "platformUserProfile" => $newState->platformUserProfile, "status" => $newState->status, "storefrontChannelId" => $newState->storefrontChannelId],
+    ], ["store_hash"], [
+      "managedChannelId",
+      "platformAccessToken",
+      "platformAccountId",
+      "platformAnalyticsId",
+      "platformBusinessId",
+      "platformUserProfile",
+      "status",
+      "storefrontChannelId"
+    ]);
+
+    return response()->json([$newState])->header('Content-Type', 'application/json');
+  }
+
+  public function exchangeAuthCodeForTokenAndProfile(Request $request)
+  {
+    $storeHash = $this->getStoreHash($request);
+
+    $userProfile = [
+      "store_hash" => $storeHash,
+      "id" => 2,
+      "email" => 'janet.weaver@reqres.in',
+      "first_name" => 'Janet',
+      "last_name" => 'Weaver',
+      "avatar" => 'https://reqres.in/img/faces/2-image.jpg'
+    ];
+
+    $updatedState = [
+      "store_hash" => $storeHash,
+      "platformAccessToken" => 'ABCD-123456789',
+      "platformBusinessId" => '123456789',
+      "platformAccountId" => '101112131415',
+      "platformAnalyticsId" => 'AN-1234-5678',
+      "platformUserProfile" => $userProfile
+    ];
+
+    DB::table('onboards')->where("store_hash", $storeHash)->update(
+      ["platformAccessToken" => $updatedState["platformAccessToken"], "platformAccountId" => $updatedState["platformAccountId"], "platformAnalyticsId" => $updatedState["platformAnalyticsId"], "platformBusinessId" => $updatedState["platformBusinessId"], "platformUserProfile" => $updatedState["platformUserProfile"]],
+    );
+
+    return response()->json($userProfile)->header('Content-Type', 'application/json');
   }
 }

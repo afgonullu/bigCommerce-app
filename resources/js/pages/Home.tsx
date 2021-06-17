@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ApiService } from "../services/ApiService";
+import { ApiService } from "../services/";
 import { Box, Flex, H1, H4, Panel } from "@bigcommerce/big-design";
 import styled from "styled-components";
 import Loading from "../components/Loading";

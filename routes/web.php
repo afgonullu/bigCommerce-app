@@ -14,6 +14,11 @@ use App\Http\Controllers\AppController;
 |
 */
 
+Route::get('/api/state', [AppController::class, "getOnboardedState"]);
+Route::post('/api/state', [AppController::class, "setOnboardedState"]);
+
+Route::post('/api/exchange_auth_code', [AppController::class, "exchangeAuthCodeForTokenAndProfile"]);
+
 Route::get('/{url?}', function () {
     return view('index');
 })->where('', 'products');

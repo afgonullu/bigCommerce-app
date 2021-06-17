@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { ApiService } from "../services/ApiService";
+import { ApiService } from "../services/index";
 import { TabIds, TabRoutes } from "./Header";
 import { Box, Button, H1, HR, Text } from "@bigcommerce/big-design";
 import { ArrowBackIcon } from "@bigcommerce/big-design-icons";

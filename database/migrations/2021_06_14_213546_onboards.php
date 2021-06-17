@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AppUsersTable extends Migration
+class Onboards extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,17 @@ class AppUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('app_users', function (Blueprint $table) {
+        Schema::create('onboards', function (Blueprint $table) {
             $table->increments('id');
             $table->string('store_hash')->unique();
-            $table->text('scope');
-            $table->string('access_token');
-            $table->string('user_id');
-            $table->string('user_email');
+            $table->text('status');
+            $table->integer('storefrontChannelId');
+            $table->integer('managedChannelId');
+            $table->text('platformAccessToken');
+            $table->text('platformBusinessId');
+            $table->text('platformAccountId');
+            $table->text('platformAnalyticsId');
+            $table->text('platformUserProfile');
             $table->timestamp('created_at')->nullable();
         });
     }
@@ -31,6 +35,6 @@ class AppUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app_users');
+        Schema::dropIfExists('onboards');
     }
 }
