@@ -3,7 +3,7 @@ import { OnboardedState } from "../interfaces/interfaces";
 
 const onboardStateApi = {
     async getOnboardedState() {
-        const { data }: { data: OnboardedState[] } = await axios({
+        const { data }: { data: OnboardedState } = await axios({
             method: "get",
             url: "/api/state",
         });

@@ -114,7 +114,7 @@ const Connect: React.FC = () => {
 
         const fetch = async () => {
             const onboardingState = await onboardStateApi.getOnboardedState();
-            setOnboardedState(onboardingState[0]);
+            setOnboardedState(onboardingState);
             setIsLoading(false);
         };
         fetch();

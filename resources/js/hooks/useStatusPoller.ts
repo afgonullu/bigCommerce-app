@@ -9,7 +9,7 @@ export function useStatusPoller() {
         "statusPoller",
         async () => {
             const onboardingState = await onboardStateApi.getOnboardedState();
-            return onboardingState[0].status;
+            return onboardingState.status;
         },
         {
             enabled,

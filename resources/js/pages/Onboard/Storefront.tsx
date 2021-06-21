@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { LoadingPanel } from "../../components/LoadingPanel";
 import { OnboardingActionBar } from "../../components/OnboardingActionBar";
 import { OnboardingHeader } from "../../components/OnboardingHeader";
+import useNextStepRedirect from "../../hooks/useNextStepRedirect";
 import { Channel } from "../../interfaces/channels";
 import channelsApi from "../../services/channels";
 
@@ -11,22 +12,29 @@ const Storefront: React.FC = () => {
     const [selectOptions, setSelectOptions] = useState([]);
     const [selectedStorefront, setSelectedStorefront] =
         useState<number | undefined>(undefined);
+    const nextStepRedirect = useNextStepRedirect();
 
     useEffect(() => {
         setIsLoading(true);
         const fetch = async () => {
             const channels = await channelsApi.getChannels();
-            console.log(channels);
-            setSelectOptions(
-                channels.data
-                    .filter((channel: Channel) => channel.type === "storefront")
-                    .map((storefront: Channel) => ({
+            const fronts = channels.data.filter(
+                (channel: Channel) => channel.type === "storefront"
+            );
+            if (fronts.length === 1) {
+                nextStepRedirect({
+                    status: "step_requirements",
+                    storefrontChannelId: fronts[0].id,
+                });
+            } else {
+                setSelectOptions(
+                    fronts.map((storefront: Channel) => ({
                         content: storefront.name,
                         value: storefront.id,
                     }))
-            );
+                );
+            }
             setIsLoading(false);
-            console.log(selectOptions);
         };
         fetch();
     }, []);
