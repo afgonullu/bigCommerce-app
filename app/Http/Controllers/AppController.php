@@ -277,17 +277,17 @@ class AppController extends Controller
       $currentState->status = $request->input('status');
     }
 
-    // if ($request->has('storefrontChannelId')) {
-    //   // $currentState["storefrontChannelId"] = $request->input('storefrontChannelId');
-    // }
+    if ($request->has('storefrontChannelId')) {
+      $currentState->storefrontChannelId = $request->input('storefrontChannelId');
+    }
 
-    // if ($request->has('managedChannelId')) {
-    //   // $currentState["managedChannelId"] = $request->input('managedChannelId');
-    // }
+    if ($request->has('managedChannelId')) {
+      $currentState->managedChannelId = $request->input('managedChannelId');
+    }
 
-    // if ($request->has('platformBusinessId')) {
-    //   // $currentState["platformBusinessId"] = $request->input('platformBusinessId');
-    // }
+    if ($request->has('platformBusinessId')) {
+      $currentState->platformBusinessId = $request->input('platformBusinessId');
+    }
 
     $currentState->save();
 
@@ -318,6 +318,6 @@ class AppController extends Controller
 
     $currentState->save();
 
-    return response()->json($userProfile);
+    return response()->json($currentState);
   }
 }

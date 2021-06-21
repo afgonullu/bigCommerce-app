@@ -1,10 +1,3 @@
-// import React, { useEffect } from "react";
-// import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-// import useOnboardRedirect from "../../hooks/useOnboardRedirect";
-// import { onboardStateApi } from "../../services";
-// import Connect from "./Connect";
-// import Requirements from "./Requirements";
-// import Storefront from "./Storefront";
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import useOnboardRedirect from "../../hooks/useOnboardRedirect";

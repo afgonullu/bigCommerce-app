@@ -1,3 +1,5 @@
+import { UserProfile } from "./userProfile";
+
 export interface FormData {
     description: string;
     isVisible: boolean;
@@ -54,5 +56,5 @@ export interface OnboardedState {
     platformBusinessId?: string;
     platformAccountId?: string;
     platformAnalyticsId?: string;
-    platformUserProfile?: string;
+    platformUserProfile?: UserProfile;
 }

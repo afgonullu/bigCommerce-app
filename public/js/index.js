@@ -24287,14 +24287,13 @@ var useNextStepRedirect = function useNextStepRedirect() {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            console.log("body received", body);
+            console.log("sent data", body);
             return [4
             /*yield*/
             , services_1.onboardStateApi.setOnboardedState(body)];
 
           case 1:
             response = _a.sent();
-            console.log("response", response);
             router.push(routes[response.status]);
             return [2
             /*return*/
@@ -25138,12 +25137,11 @@ var Connect = function Connect() {
 
   var connect = react_1.useCallback(function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var _a, email, avatar, newState, error_1;
-
-      return __generator(this, function (_b) {
-        switch (_b.label) {
+      var data, newState, error_1;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
           case 0:
-            _b.trys.push([0, 2,, 3]);
+            _a.trys.push([0, 2,, 3]);
 
             console.log("starting");
             return [4
@@ -25151,13 +25149,13 @@ var Connect = function Connect() {
             , exchangeAuthCode(456)];
 
           case 1:
-            _a = _b.sent(), email = _a.email, avatar = _a.avatar;
-            newState = __assign(__assign({}, onboardedState), {
+            data = _a.sent();
+            newState = __assign(__assign({}, data), {
               status: "step_connection_ready"
             });
             setUserProfile({
-              email: email,
-              avatar: avatar
+              email: data.platformUserProfile.email,
+              avatar: data.platformUserProfile.avatar
             });
             nextStepRedirect(newState);
             setOnboardedState(newState);
@@ -25167,7 +25165,7 @@ var Connect = function Connect() {
             , 3];
 
           case 2:
-            error_1 = _b.sent();
+            error_1 = _a.sent();
             return [3
             /*break*/
             , 3];
@@ -25188,12 +25186,9 @@ var Connect = function Connect() {
 
   react_1.useEffect(function () {
     if (authReady && !userProfile && (onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformUserProfile)) {
-      console.log(onboardedState.platformUserProfile);
-
-      var _a = JSON.parse(onboardedState.platformUserProfile),
+      var _a = onboardedState.platformUserProfile,
           email = _a.email,
           avatar = _a.avatar;
-
       setUserProfile({
         email: email,
         avatar: avatar
@@ -25277,13 +25272,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
-})); // import React, { useEffect } from "react";
-// import { Route, Switch, useHistory, useRouteMatch } from "react-router-dom";
-// import useOnboardRedirect from "../../hooks/useOnboardRedirect";
-// import { onboardStateApi } from "../../services";
-// import Connect from "./Connect";
-// import Requirements from "./Requirements";
-// import Storefront from "./Storefront";
+}));
 
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 
@@ -25827,7 +25816,6 @@ var Storefront = function Storefront() {
       setSelectedStorefront = _c[1];
 
   var nextStepRedirect = useNextStepRedirect_1["default"]();
-  console.log("reached to storefront");
   react_1.useEffect(function () {
     setIsLoading(true);
 
@@ -25843,13 +25831,11 @@ var Storefront = function Storefront() {
 
             case 1:
               channels = _a.sent();
-              console.log(channels);
               fronts = channels.data.filter(function (channel) {
                 return channel.type === "storefront";
               });
 
               if (fronts.length === 1) {
-                console.log("only 1 store, redirecting");
                 nextStepRedirect({
                   status: "step_requirements",
                   storefrontChannelId: fronts[0].id

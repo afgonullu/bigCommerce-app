@@ -37,12 +37,15 @@ const Connect: React.FC = () => {
     const connect = useCallback(async () => {
         try {
             console.log("starting");
-            const { email, avatar } = await exchangeAuthCode(456);
+            const data = await exchangeAuthCode(456);
             const newState: OnboardedState = {
-                ...onboardedState,
+                ...data,
                 status: "step_connection_ready",
             };
-            setUserProfile({ email, avatar });
+            setUserProfile({
+                email: data.platformUserProfile!.email,
+                avatar: data.platformUserProfile!.avatar,
+            });
             nextStepRedirect(newState);
             setOnboardedState(newState);
             stopPoller();
@@ -100,11 +103,7 @@ const Connect: React.FC = () => {
 
     useEffect(() => {
         if (authReady && !userProfile && onboardedState?.platformUserProfile) {
-            console.log(onboardedState.platformUserProfile);
-            const { email, avatar } = JSON.parse(
-                onboardedState.platformUserProfile
-            );
-
+            const { email, avatar } = onboardedState.platformUserProfile;
             setUserProfile({ email, avatar });
         }
     }, [authReady, userProfile, onboardedState?.platformUserProfile]);
