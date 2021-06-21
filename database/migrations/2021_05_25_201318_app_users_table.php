@@ -21,6 +21,7 @@ class AppUsersTable extends Migration
             $table->string('user_id');
             $table->string('user_email');
             $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

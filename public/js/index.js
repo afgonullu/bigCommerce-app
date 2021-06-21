@@ -25221,53 +25221,57 @@ var Onboard = function Onboard() {
               onboardingState = _a.sent();
               console.log("state", onboardingState);
 
-              switch (onboardingState[0].status) {
-                case "step_storefront_select":
-                  {
-                    // if (match.path === "/onboard/storefront") {
-                    //     if (!hasMultipleStorefronts && !isLoading) {
-                    //         nextStepRedirect({
-                    //             status: "step_requirements",
-                    //             storefrontChannelId: storefrontChannels[0].id,
-                    //         });
-                    //     }
-                    // } else {
-                    //     router.push("/onboard/storefront");
-                    // }
-                    router.push("/onboard/storefront");
+              if (onboardingState[0]) {
+                switch (onboardingState[0].status) {
+                  case "step_storefront_select":
+                    {
+                      // if (match.path === "/onboard/storefront") {
+                      //     if (!hasMultipleStorefronts && !isLoading) {
+                      //         nextStepRedirect({
+                      //             status: "step_requirements",
+                      //             storefrontChannelId: storefrontChannels[0].id,
+                      //         });
+                      //     }
+                      // } else {
+                      //     router.push("/onboard/storefront");
+                      // }
+                      router.push("/onboard/storefront");
+                      break;
+                    }
+
+                  case "step_requirements":
+                    if (match.path !== "/onboard/requirements") {
+                      router.push("/onboard/requirements");
+                    }
+
                     break;
-                  }
 
-                case "step_requirements":
-                  if (match.path !== "/onboard/requirements") {
-                    router.push("/onboard/requirements");
-                  }
+                  case "step_connection":
+                    if (match.path !== "/onboard/connect") {
+                      router.push("/onboard/connect");
+                    }
 
-                  break;
+                    break;
 
-                case "step_connection":
-                  if (match.path !== "/onboard/connect") {
-                    router.push("/onboard/connect");
-                  }
+                  case "step_connection_ready":
+                    if (match.path !== "/onboard/connect") {
+                      router.push("/onboard/connect");
+                    }
 
-                  break;
+                    break;
 
-                case "step_connection_ready":
-                  if (match.path !== "/onboard/connect") {
-                    router.push("/onboard/connect");
-                  }
+                  case "onboarded":
+                    if (match.path !== "/overview") {
+                      router.push("/overview");
+                    }
 
-                  break;
+                    break;
 
-                case "onboarded":
-                  if (match.path !== "/overview") {
-                    router.push("/overview");
-                  }
-
-                  break;
-
-                default:
-                  router.push("/onboard");
+                  default:
+                    router.push("/onboard");
+                }
+              } else {
+                router.push("/onboard/storefront");
               }
 
               return [2

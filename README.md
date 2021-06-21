@@ -9,7 +9,18 @@ For other development environments, refer to official Laravel, PHP and mysql doc
 
 ## How To Run on Local Machine
 
-1. Download the Repo and open in your code editor.
+1. Download the Repo and open in your code editor.  
+    a. If you are on a fresh computer with no php, Laravel or Sail configuration has ever done before; use below command to get `Sail` up and available.
+
+    ```
+    docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/opt \
+    -w /opt \
+    laravelsail/php80-composer:latest \
+    composer install --ignore-platform-reqs
+    ```
+    [Reference](https://laravel.com/docs/8.x/sail#installing-composer-dependencies-for-existing-projects)
 2. Make a copy of `.env.example` and rename it `.env`
 3. [Add and start ngrok.](https://www.npmjs.com/package/ngrok#usage) Note: use port 80 to match Laravel app. - `npm install ngrok` - `ngrok http 80` - Make note of your secure forwarding address (e.g. https://7865ec2cf4de.ngrok.io). `7865ec2cf4de` is your `ngrok_id` for session duration.
 

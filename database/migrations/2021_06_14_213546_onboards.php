@@ -25,6 +25,7 @@ class Onboards extends Migration
             $table->text('platformAnalyticsId');
             $table->text('platformUserProfile');
             $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

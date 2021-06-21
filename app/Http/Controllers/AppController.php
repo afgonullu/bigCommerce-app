@@ -9,6 +9,10 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use App\Models\Onboard;
+use App\Models\AppUser;
+
+// TODO: change db actions in order to facilitate Model usage for type consistency for the future.
 
 class AppController extends Controller
 {
@@ -235,7 +239,7 @@ class AppController extends Controller
       ->get();
 
     if (count($currentState) === 0) {
-      $currentState = [
+      $currentState = collect([
         "store_hash" => $storeHash,
         "managedChannelId" => -1,
         "platformAccessToken" => '',
@@ -245,7 +249,7 @@ class AppController extends Controller
         "platformUserProfile" => '',
         "status" => 'step_storefront_select',
         "storefrontChannelId" => -1,
-      ];
+      ]);
     }
     return response()->json($currentState)->header('Content-Type', 'application/json');
   }
@@ -254,13 +258,11 @@ class AppController extends Controller
   {
     $storeHash = $this->getStoreHash($request);
 
-    $currentState = DB::table('onboards')
-      ->where('store_hash', '=', $storeHash)
-      ->get();
-
-    if (count($currentState) === 0) {
-      $newState = [
-        "store_hash" => $storeHash,
+    $currentState = Onboard::firstOrCreate(
+      [
+        'store_hash' => $storeHash
+      ],
+      [
         "managedChannelId" => -1,
         "platformAccessToken" => '',
         "platformAccountId" => '',
@@ -269,41 +271,29 @@ class AppController extends Controller
         "platformUserProfile" => '',
         "status" => 'step_storefront_select',
         "storefrontChannelId" => -1,
-      ];
-    } else {
-      $newState = $currentState[0];
-    }
+      ]
+    );
 
     if ($request->has('status')) {
-      $newState->status = $request->input('status');
+      $currentState->status = $request->input('status');
     }
 
-    if ($request->has('storefrontChannelId')) {
-      $newState->storefrontChannelId = $request->input('storefrontChannelId');
-    }
+    // if ($request->has('storefrontChannelId')) {
+    //   // $currentState["storefrontChannelId"] = $request->input('storefrontChannelId');
+    // }
 
-    if ($request->has('managedChannelId')) {
-      $newState->managedChannelId = $request->input('managedChannelId');
-    }
+    // if ($request->has('managedChannelId')) {
+    //   // $currentState["managedChannelId"] = $request->input('managedChannelId');
+    // }
 
-    if ($request->has('platformBusinessId')) {
-      $newState->platformBusinessId = $request->input('platformBusinessId');
-    }
+    // if ($request->has('platformBusinessId')) {
+    //   // $currentState["platformBusinessId"] = $request->input('platformBusinessId');
+    // }
 
-    DB::table('onboards')->upsert([
-      ["store_hash" => $newState->store_hash, "managedChannelId" => $newState->managedChannelId, "platformAccessToken" => $newState->platformAccessToken, "platformAccountId" => $newState->platformAccountId, "platformAnalyticsId" => $newState->platformAnalyticsId, "platformBusinessId" => $newState->platformBusinessId, "platformUserProfile" => $newState->platformUserProfile, "status" => $newState->status, "storefrontChannelId" => $newState->storefrontChannelId],
-    ], ["store_hash"], [
-      "managedChannelId",
-      "platformAccessToken",
-      "platformAccountId",
-      "platformAnalyticsId",
-      "platformBusinessId",
-      "platformUserProfile",
-      "status",
-      "storefrontChannelId"
-    ]);
+    $currentState->save();
 
-    return response()->json([$newState])->header('Content-Type', 'application/json');
+
+    return response()->json($currentState);
   }
 
   public function exchangeAuthCodeForTokenAndProfile(Request $request)
