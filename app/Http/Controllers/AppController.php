@@ -234,24 +234,23 @@ class AppController extends Controller
   {
     $storeHash = $this->getStoreHash($request);
 
-    $currentState = DB::table('onboards')
-      ->where('store_hash', '=', $storeHash)
-      ->get();
+    $currentState = Onboard::firstWhere('store_hash', $storeHash);
 
-    if (count($currentState) === 0) {
-      $currentState = collect([
-        "store_hash" => $storeHash,
-        "managedChannelId" => -1,
-        "platformAccessToken" => '',
-        "platformAccountId" => '',
-        "platformAnalyticsId" => '',
-        "platformBusinessId" => '',
-        "platformUserProfile" => '',
-        "status" => 'step_storefront_select',
-        "storefrontChannelId" => -1,
-      ]);
+    if (empty($currentState)) {
+      $currentState =
+        [
+          "managedChannelId" => -1,
+          "platformAccessToken" => '',
+          "platformAccountId" => '',
+          "platformAnalyticsId" => '',
+          "platformBusinessId" => '',
+          "platformUserProfile" => '',
+          "status" => 'step_storefront_select',
+          "storefrontChannelId" => -1,
+        ];
     }
-    return response()->json($currentState)->header('Content-Type', 'application/json');
+
+    return response()->json($currentState);
   }
 
   public function setOnboardedState(Request $request)
@@ -309,19 +308,16 @@ class AppController extends Controller
       "avatar" => 'https://reqres.in/img/faces/2-image.jpg'
     ];
 
-    $updatedState = [
-      "store_hash" => $storeHash,
-      "platformAccessToken" => 'ABCD-123456789',
-      "platformBusinessId" => '123456789',
-      "platformAccountId" => '101112131415',
-      "platformAnalyticsId" => 'AN-1234-5678',
-      "platformUserProfile" => $userProfile
-    ];
+    $currentState = Onboard::firstWhere('store_hash', $storeHash);
 
-    DB::table('onboards')->where("store_hash", $storeHash)->update(
-      ["platformAccessToken" => $updatedState["platformAccessToken"], "platformAccountId" => $updatedState["platformAccountId"], "platformAnalyticsId" => $updatedState["platformAnalyticsId"], "platformBusinessId" => $updatedState["platformBusinessId"], "platformUserProfile" => $updatedState["platformUserProfile"]],
-    );
+    $currentState->platformAccessToken = 'ABCD-123456789';
+    $currentState->platformBusinessId = '123456789';
+    $currentState->platformAccountId = '101112131415';
+    $currentState->platformAnalyticsId = 'AN-1234-5678';
+    $currentState->platformUserProfile = $userProfile;
 
-    return response()->json($userProfile)->header('Content-Type', 'application/json');
+    $currentState->save();
+
+    return response()->json($userProfile);
   }
 }
