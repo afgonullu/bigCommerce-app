@@ -213,6 +213,10 @@ class AppController extends Controller
       $requestConfig['body'] = $request->getContent();
     }
 
+    if ($request->method() === 'POST') {
+      $requestConfig['body'] = $request->getContent();
+    }
+
     $client = new Client();
     $result = $client->request($request->method(), 'https://api.bigcommerce.com/' . $this->getStoreHash($request) . '/' . $endpoint, $requestConfig);
     return $result;
@@ -314,7 +318,7 @@ class AppController extends Controller
     $currentState->platformBusinessId = '123456789';
     $currentState->platformAccountId = '101112131415';
     $currentState->platformAnalyticsId = 'AN-1234-5678';
-    $currentState->platformUserProfile = $userProfile;
+    $currentState->platformUserProfile = json_encode($userProfile);
 
     $currentState->save();
 

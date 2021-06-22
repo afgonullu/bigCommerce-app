@@ -4,8 +4,8 @@ return [
 
     'appEnv' => env('APP_ENV', 'production'),
     'appUrl' => env('APP_URL'),
-    'clientId' => env('CLIENT_ID'),
-    'clientSecret' => env('CLIENT_SECRET'),
+    'clientId' => env('MIX_CLIENT_ID'),
+    'clientSecret' => env('MIX_CLIENT_SECRET'),
     'authCallback' => env('AUTH_CALLBACK'),
     'localAccessToken' => env('L_ACCESS_TOKEN'),
     'localApiPath' => env('L_API_PATH'),

@@ -9,6 +9,7 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Onboard from "./pages/Onboard/Onboard";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Overview from "./pages/Overview/Overview";
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -40,7 +41,7 @@ const App: React.FC = () => {
                         {/* <AlertsManager manager={alertsManager} /> */}
                         <BrowserRouter>
                             <Switch>
-                                {/* <Route exact path="/overview" component={Overview} /> */}
+                                <Route path="/overview" component={Overview} />
                                 <Route path="/onboard" component={Onboard} />
                                 <Route path="/products" component={Products} />
                                 <Route

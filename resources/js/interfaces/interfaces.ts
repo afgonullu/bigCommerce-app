@@ -1,5 +1,3 @@
-import { UserProfile } from "./userProfile";
-
 export interface FormData {
     description: string;
     isVisible: boolean;
@@ -50,11 +48,12 @@ export type OnboardedStatus =
     | "onboarded";
 
 export interface OnboardedState {
+    store_hash?: string;
     status: OnboardedStatus;
     storefrontChannelId?: number;
     managedChannelId?: number;
     platformBusinessId?: string;
     platformAccountId?: string;
     platformAnalyticsId?: string;
-    platformUserProfile?: UserProfile;
+    platformUserProfile?: string;
 }

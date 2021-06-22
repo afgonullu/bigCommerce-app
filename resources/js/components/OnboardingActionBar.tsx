@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { OnboardedState } from "../interfaces/interfaces";
 import { useOnboardingSteps } from "../hooks/useOnboardingSteps";
 import useNextStepRedirect from "../hooks/useNextStepRedirect";
+import useUpsertChannel from "../hooks/useUpsertChannel";
 
 interface Props {
     currentStep: number;
@@ -20,7 +21,7 @@ const StyledFlex = styled(Box)`
     width: 100%;
 `;
 
-export const OnboardingActionBar: React.FC<Props> = ({
+const OnboardingActionBar: React.FC<Props> = ({
     canContinue,
     currentStep,
     dataToSave,
@@ -29,10 +30,10 @@ export const OnboardingActionBar: React.FC<Props> = ({
     const router = useHistory();
     const nextStepRedirect = useNextStepRedirect();
     const [creatingChannel, setCreatingChannel] = useState(false);
-    // const upsertChannel = useUpsertChannel();
+    const upsertChannel = useUpsertChannel();
     // const [addAlert] = useAlert();
 
-    function onContinue() {
+    const onContinue = async () => {
         const nextStepIndex = currentStep + 1;
 
         if (nextStepIndex < steps.length) {
@@ -48,19 +49,22 @@ export const OnboardingActionBar: React.FC<Props> = ({
             router.push(nextStep.route);
         } else {
             setCreatingChannel(true);
+            console.log("onboarding finished. creating channel.");
 
-            // upsertChannel()
-            //     .catch(() => {
-            //         console.log("error occured");
-            //         // addAlert({
-            //         //     header: "Error",
-            //         //     body: "Unable to create channel.",
-            //         //     type: "error",
-            //         // });
-            //     })
-            //     .finally(() => setCreatingChannel(false));
+            try {
+                await upsertChannel();
+            } catch (error) {
+                console.log("error occured");
+                //         // addAlert({
+                //         //     header: "Error",
+                //         //     body: "Unable to create channel.",
+                //         //     type: "error",
+                //         // });
+            }
+
+            setCreatingChannel(false);
         }
-    }
+    };
 
     return (
         <StyledFlex backgroundColor="white" border="box" padding="medium">
@@ -76,3 +80,5 @@ export const OnboardingActionBar: React.FC<Props> = ({
         </StyledFlex>
     );
 };
+
+export default OnboardingActionBar;

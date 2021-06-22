@@ -1,7 +1,7 @@
 import { Form, FormGroup, Select } from "@bigcommerce/big-design";
 import React, { useEffect, useState } from "react";
 import { LoadingPanel } from "../../components/LoadingPanel";
-import { OnboardingActionBar } from "../../components/OnboardingActionBar";
+import OnboardingActionBar from "../../components/OnboardingActionBar";
 import { OnboardingHeader } from "../../components/OnboardingHeader";
 import useNextStepRedirect from "../../hooks/useNextStepRedirect";
 import { Channel } from "../../interfaces/channels";

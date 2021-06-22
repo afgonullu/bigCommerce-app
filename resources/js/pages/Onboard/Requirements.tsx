@@ -5,7 +5,7 @@ import Requirement from "../../components/Requirement";
 import { Requirement as RequirementType } from "../../interfaces/requirement";
 import { OnboardingHeader } from "../../components/OnboardingHeader";
 import { LoadingPanel } from "../../components/LoadingPanel";
-import { OnboardingActionBar } from "../../components/OnboardingActionBar";
+import OnboardingActionBar from "../../components/OnboardingActionBar";
 import requirementsApi from "../../services/requirements";
 import config from "../../utils/config";
 

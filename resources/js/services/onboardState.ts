@@ -3,18 +3,16 @@ import { OnboardedState } from "../interfaces/interfaces";
 
 const onboardStateApi = {
     async getOnboardedState() {
-        const { data }: { data: OnboardedState } = await axios({
-            method: "get",
-            url: "/api/state",
-        });
+        const { data }: { data: OnboardedState } = await axios.get(
+            "/api/state"
+        );
         return data;
     },
     async setOnboardedState(body: OnboardedState) {
-        const { data }: { data: OnboardedState } = await axios({
-            method: "post",
-            url: "/api/state",
-            data: body,
-        });
+        const { data }: { data: OnboardedState } = await axios.post(
+            "/api/state",
+            body
+        );
         return data;
     },
 };
