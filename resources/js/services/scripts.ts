@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Script } from "../interfaces/script";
-import config from "../utils/config";
 import onboardStateApi from "./onboardState";
 
 import { addToCart } from "../../scripts/storefront/_addtocart.template";
@@ -58,10 +57,9 @@ const scriptsApi = {
             },
         ];
 
-        const { data: existingScripts }: { data: Script[] } = await axios.get(
-            `/bc-api/v3/content/scripts?channel_id=${integrationState.managedChannelId}&api_client_id=${config.CLIENT_ID}`
-        );
-
+        // const { data: existingScripts }: { data: Script[] } = await axios.get(
+        //     `/bc-api/v3/content/scripts?channel_id=${integrationState.managedChannelId}&api_client_id=${config.CLIENT_ID}`
+        // );
 
         const addedScripts: Script[] = [];
         for (const script of scriptTags) {

@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import AdAccount from "../../components/Overview/AdAccount";
+import Analytics from "../../components/Overview/Analytics";
+import BusinessCenter from "../../components/Overview/BusinessCenter";
+import PageTitle from "../../components/PageTitle";
+import { OnboardedState } from "../../interfaces/interfaces";
+import { onboardStateApi } from "../../services";
 
 const Overview: React.FC = () => {
-    return <h1>h1"Hello from Overview"</h1>;
+    const router = useHistory();
+    const [onboardedState, setOnboardedState] = useState<OnboardedState | null>(
+        null
+    );
+
+    useEffect(() => {
+        const fetch = async () => {
+            const onboardingState = await onboardStateApi.getOnboardedState();
+            if (onboardingState.status !== "onboarded") {
+                router.push("/onboard");
+            }
+            setOnboardedState(onboardingState);
+        };
+        fetch();
+    }, []);
+
+    if (!onboardedState || onboardedState?.status !== "onboarded") {
+        return <></>;
+    }
+
+    return (
+        <>
+            <PageTitle title="Overview" />
+
+            <BusinessCenter accountName={onboardedState?.platformBusinessId} />
+            <AdAccount accountName={onboardedState?.platformAccountId} />
+            <Analytics accountName={onboardedState?.platformAnalyticsId} />
+            {/* <CatalogSync /> */}
+        </>
+    );
 };
 
 export default Overview;

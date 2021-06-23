@@ -22810,7 +22810,6 @@ var App = function App() {
   }, react_1["default"].createElement(styled_components_1.ThemeProvider, {
     theme: theme
   }, react_1["default"].createElement(AppGlobalStyles, null), react_1["default"].createElement(big_design_1.GlobalStyles, null), react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
-    exact: true,
     path: "/overview",
     component: Overview_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
@@ -24000,6 +23999,390 @@ var OnboardingHeader = function OnboardingHeader(_a) {
 };
 
 exports.OnboardingHeader = OnboardingHeader;
+
+/***/ }),
+
+/***/ "./resources/js/components/Overview/AdAccount.tsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Overview/AdAccount.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var OverviewPanel_1 = __importDefault(__webpack_require__(/*! ../OverviewPanel */ "./resources/js/components/OverviewPanel.tsx"));
+
+var AdAccount = function AdAccount(_a) {
+  var accountName = _a.accountName;
+
+  var onClick = function onClick() {
+    console.log("Navigate to Business Center");
+  };
+
+  return react_1["default"].createElement(OverviewPanel_1["default"], {
+    accountLabel: "Account ID",
+    accountName: accountName,
+    action: {
+      variant: "secondary",
+      text: "Manage",
+      onClick: onClick
+    },
+    description: "Create ads with your ad account",
+    header: "Ad Account",
+    statusLabel: "connected",
+    statusVariant: "success"
+  });
+};
+
+exports.default = AdAccount;
+
+/***/ }),
+
+/***/ "./resources/js/components/Overview/Analytics.tsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Overview/Analytics.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var OverviewPanel_1 = __importDefault(__webpack_require__(/*! ../OverviewPanel */ "./resources/js/components/OverviewPanel.tsx"));
+
+var OverviewPanelToggle_1 = __importDefault(__webpack_require__(/*! ../OverviewPanelToggle */ "./resources/js/components/OverviewPanelToggle.tsx"));
+
+var Analytics = function Analytics(_a) {
+  var accountName = _a.accountName;
+
+  var _b = react_1.useState(true),
+      isAdvancedMatching = _b[0],
+      setIsAdvancedMatching = _b[1];
+
+  var updatingScriptStatus = false;
+
+  var onClick = function onClick() {
+    console.log("Navigate to Ad Center");
+  };
+
+  return react_1["default"].createElement(OverviewPanel_1["default"], {
+    accountLabel: "Pixel ID",
+    accountName: accountName,
+    action: {
+      variant: "secondary",
+      text: "Manage",
+      onClick: onClick
+    },
+    description: "Create ads with your ad account",
+    header: "Pixel",
+    statusLabel: "connected",
+    statusVariant: "success"
+  }, react_1["default"].createElement(OverviewPanelToggle_1["default"], {
+    checked: isAdvancedMatching,
+    disabled: updatingScriptStatus,
+    disabledText: "Advanced matching disabled",
+    enabledText: "Advanced matching enabled",
+    label: "Advanced Matching",
+    onChange: function onChange() {
+      return setIsAdvancedMatching(function (isEnabled) {
+        return !isEnabled;
+      });
+    }
+  }, react_1["default"].createElement(big_design_1.Small, null, "By enabling advanced matching you agree to share customer details data, which includes email, phone number, name and location. This could increase your retargeting audience, drive better conversion attribution, and improve your campaign performance.", " ", react_1["default"].createElement("a", {
+    href: "#",
+    target: "_blank"
+  }, "View our Terms and Conditions"), ".")));
+};
+
+exports.default = Analytics;
+
+/***/ }),
+
+/***/ "./resources/js/components/Overview/BusinessCenter.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/Overview/BusinessCenter.tsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var OverviewPanel_1 = __importDefault(__webpack_require__(/*! ../OverviewPanel */ "./resources/js/components/OverviewPanel.tsx"));
+
+var BusinessCenter = function BusinessCenter(_a) {
+  var accountName = _a.accountName;
+
+  var onClick = function onClick() {
+    console.log("Navigate to Business Center");
+  };
+
+  return react_1["default"].createElement(OverviewPanel_1["default"], {
+    accountLabel: "Business ID",
+    accountName: accountName,
+    action: {
+      variant: "secondary",
+      text: "Manage",
+      onClick: onClick
+    },
+    description: "The Business Center that owns all your ad accounts",
+    header: "Business Center",
+    statusLabel: "connected",
+    statusVariant: "success"
+  });
+};
+
+exports.default = BusinessCenter;
+
+/***/ }),
+
+/***/ "./resources/js/components/OverviewPanel.tsx":
+/*!***************************************************!*\
+  !*** ./resources/js/components/OverviewPanel.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var OverviewPanel = function OverviewPanel(_a) {
+  var accountLabel = _a.accountLabel,
+      accountName = _a.accountName,
+      action = _a.action,
+      children = _a.children,
+      description = _a.description,
+      header = _a.header,
+      statusLabel = _a.statusLabel,
+      statusVariant = _a.statusVariant;
+  return react_1["default"].createElement(big_design_1.Panel, null, react_1["default"].createElement(big_design_1.Flex, null, react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0,
+    paddingRight: "small"
+  }, react_1["default"].createElement(big_design_1.H2, null, header)), react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 1
+  }, react_1["default"].createElement(big_design_1.Badge, {
+    label: statusLabel,
+    variant: statusVariant,
+    marginTop: {
+      mobile: "none",
+      tablet: "xSmall"
+    },
+    marginBottom: {
+      mobile: "medium",
+      tablet: "none"
+    }
+  })), react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0
+  }, action && react_1["default"].createElement(big_design_1.Button, __assign({}, action), action.text))), react_1["default"].createElement(big_design_1.Box, {
+    marginTop: {
+      mobile: "small",
+      tablet: "none"
+    }
+  }, react_1["default"].createElement(big_design_1.Text, null, description)), react_1["default"].createElement(big_design_1.Box, {
+    marginTop: "small"
+  }, react_1["default"].createElement(big_design_1.Text, {
+    as: "span",
+    bold: true
+  }, accountLabel, ":"), " ", react_1["default"].createElement(big_design_1.Text, {
+    as: "span"
+  }, accountName ? accountName : "N/A")), children);
+};
+
+exports.default = OverviewPanel;
+
+/***/ }),
+
+/***/ "./resources/js/components/OverviewPanelToggle.tsx":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/OverviewPanelToggle.tsx ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var OverviewPanelToggle = function OverviewPanelToggle(_a) {
+  var label = _a.label,
+      checked = _a.checked,
+      children = _a.children,
+      disabled = _a.disabled,
+      disabledText = _a.disabledText,
+      enabledText = _a.enabledText,
+      onChange = _a.onChange;
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(big_design_1.Box, {
+    marginTop: "small"
+  }, react_1["default"].createElement(big_design_1.Text, {
+    bold: true
+  }, label), children), react_1["default"].createElement(big_design_1.Box, {
+    marginTop: "small"
+  }, react_1["default"].createElement(big_design_1.Flex, {
+    alignItems: "center"
+  }, react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0,
+    paddingRight: "small"
+  }, react_1["default"].createElement(big_design_1.Switch, {
+    checked: checked,
+    disabled: disabled,
+    onChange: onChange
+  })), react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 1
+  }, checked ? react_1["default"].createElement(big_design_1.Text, null, enabledText) : react_1["default"].createElement(big_design_1.Text, {
+    color: "secondary"
+  }, disabledText)))));
+};
+
+exports.default = OverviewPanelToggle;
+
+/***/ }),
+
+/***/ "./resources/js/components/PageTitle.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/components/PageTitle.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var PageTitle = function PageTitle(_a) {
+  var title = _a.title;
+  return react_1["default"].createElement(big_design_1.H1, {
+    marginLeft: {
+      mobile: "medium",
+      tablet: "none"
+    }
+  }, title);
+};
+
+exports.default = PageTitle;
 
 /***/ }),
 
@@ -25222,14 +25605,12 @@ var useUpsertChannel = function useUpsertChannel() {
 
           case 1:
             data = _a.sent();
-            console.log("data get onboardstate", data);
             return [4
             /*yield*/
             , channels_1["default"].setChannels(data.store_hash)];
 
           case 2:
             response = _a.sent();
-            console.log(response);
             return [4
             /*yield*/
             , scripts_1["default"].installStorefrontScripts()];
@@ -25531,7 +25912,6 @@ var Connect = function Connect() {
   var openPopup = useConnectPopup_1.useConnectPopup();
   var exchangeAuthCode = useExchangeAuthCode_1.useExchangeAuthCode(); // const [addAlert] = useAlert();
 
-  console.log("profile", userProfile);
   var connect = react_1.useCallback(function () {
     return __awaiter(void 0, void 0, void 0, function () {
       var data, newState, userData, error_1;
@@ -25547,23 +25927,17 @@ var Connect = function Connect() {
 
           case 1:
             data = _a.sent();
-            console.log("return auth data state", data);
             newState = __assign(__assign({}, data), {
               status: "step_connection_ready"
             });
-            console.log("newState", newState);
             userData = JSON.parse(data.platformUserProfile);
             setUserProfile({
               email: userData.email,
               avatar: userData.avatar
             });
-            console.log("1");
             nextStepRedirect(newState);
-            console.log("2");
             setOnboardedState(newState);
-            console.log("3");
             stopPoller();
-            console.log("finished");
             return [3
             /*break*/
             , 3];
@@ -25591,7 +25965,6 @@ var Connect = function Connect() {
   react_1.useEffect(function () {
     if (authReady && !userProfile && (onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformUserProfile)) {
       var userData = JSON.parse(onboardedState.platformUserProfile);
-      console.log(userData);
       var email = userData.email,
           avatar = userData.avatar;
       setUserProfile({
@@ -25615,7 +25988,6 @@ var Connect = function Connect() {
 
             case 1:
               onboardingState = _a.sent();
-              console.log(onboardingState);
               setOnboardedState(onboardingState);
               setIsLoading(false);
               return [2
@@ -26304,6 +26676,183 @@ exports.default = Storefront;
 "use strict";
 
 
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -26314,10 +26863,70 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+var AdAccount_1 = __importDefault(__webpack_require__(/*! ../../components/Overview/AdAccount */ "./resources/js/components/Overview/AdAccount.tsx"));
+
+var Analytics_1 = __importDefault(__webpack_require__(/*! ../../components/Overview/Analytics */ "./resources/js/components/Overview/Analytics.tsx"));
+
+var BusinessCenter_1 = __importDefault(__webpack_require__(/*! ../../components/Overview/BusinessCenter */ "./resources/js/components/Overview/BusinessCenter.tsx"));
+
+var PageTitle_1 = __importDefault(__webpack_require__(/*! ../../components/PageTitle */ "./resources/js/components/PageTitle.tsx"));
+
+var services_1 = __webpack_require__(/*! ../../services */ "./resources/js/services/index.ts");
 
 var Overview = function Overview() {
-  return react_1["default"].createElement("h1", null, "h1\"Hello from Overview\"");
+  var router = react_router_dom_1.useHistory();
+
+  var _a = react_1.useState(null),
+      onboardedState = _a[0],
+      setOnboardedState = _a[1];
+
+  react_1.useEffect(function () {
+    var fetch = function fetch() {
+      return __awaiter(void 0, void 0, void 0, function () {
+        var onboardingState;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , services_1.onboardStateApi.getOnboardedState()];
+
+            case 1:
+              onboardingState = _a.sent();
+
+              if (onboardingState.status !== "onboarded") {
+                router.push("/onboard");
+              }
+
+              setOnboardedState(onboardingState);
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    fetch();
+  }, []);
+
+  if (!onboardedState || (onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.status) !== "onboarded") {
+    return react_1["default"].createElement(react_1["default"].Fragment, null);
+  }
+
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(PageTitle_1["default"], {
+    title: "Overview"
+  }), react_1["default"].createElement(BusinessCenter_1["default"], {
+    accountName: onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformBusinessId
+  }), react_1["default"].createElement(AdAccount_1["default"], {
+    accountName: onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformAccountId
+  }), react_1["default"].createElement(Analytics_1["default"], {
+    accountName: onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformAnalyticsId
+  }));
 };
 
 exports.default = Overview;
@@ -27229,17 +27838,14 @@ var channelsApi = {
 
           case 1:
             data = _a.sent().data;
-            console.log("channels", data);
             existingChannel = data.filter(function (channel) {
               var _a, _b;
 
               return channel.type === config_1["default"].NEXT_PUBLIC_CHANNEL_TYPE && channel.platform === config_1["default"].NEXT_PUBLIC_CHANNEL_PLATFORM && ((_b = (_a = channel.config_meta) === null || _a === void 0 ? void 0 : _a.app) === null || _b === void 0 ? void 0 : _b.id) === config_1["default"].APP_ID;
             });
-            console.log("existing channel", existingChannel);
             if (!(existingChannel.length > 0)) return [3
             /*break*/
             , 3];
-            console.log("there is existing channel");
             existingChannelId = existingChannel[0].id;
             channelManagerUrl = "https://store-" + storeHash.substr(7) + ".mybigcommerce.com/manage/channel/" + existingChannelId + "/app?id=" + config_1["default"].APP_ID;
             return [4
@@ -27260,7 +27866,6 @@ var channelsApi = {
             }];
 
           case 3:
-            console.log("there is no existing channel");
             channel = {
               is_listable_from_ui: config_1["default"].NEXT_PUBLIC_CHANNEL_LISTABLE_FROM_UI === "true",
               is_visible: true,
@@ -27284,14 +27889,12 @@ var channelsApi = {
                 }
               }
             };
-            console.log("channel to be created", channel);
             return [4
             /*yield*/
             , axios_1["default"].post("/bc-api/v3/channels", channel)];
 
           case 4:
             response = _a.sent();
-            console.log("channel created", response);
             createdChannelId = response.data.data.id;
             channelManagerUrl = "https://store-" + storeHash.substr(7) + ".mybigcommerce.com/manage/channel/" + createdChannelId + "/app?id=" + config_1["default"].APP_ID;
             return [4
@@ -27903,8 +28506,6 @@ Object.defineProperty(exports, "__esModule", ({
 
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
 
-var config_1 = __importDefault(__webpack_require__(/*! ../utils/config */ "./resources/js/utils/config.ts"));
-
 var onboardState_1 = __importDefault(__webpack_require__(/*! ./onboardState */ "./resources/js/services/onboardState.ts"));
 
 var _addtocart_template_1 = __webpack_require__(/*! ../../scripts/storefront/_addtocart.template */ "./resources/scripts/storefront/_addtocart.template.ts");
@@ -27922,7 +28523,7 @@ var _viewcontent_template_1 = __webpack_require__(/*! ../../scripts/storefront/_
 var scriptsApi = {
   installStorefrontScripts: function installStorefrontScripts() {
     return __awaiter(this, void 0, void 0, function () {
-      var integrationState, scriptTags, existingScripts, addedScripts, _i, scriptTags_1, script, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
+      var integrationState, scriptTags, addedScripts, _i, scriptTags_1, script, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
 
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -27970,32 +28571,15 @@ var scriptsApi = {
               visibility: "order_confirmation",
               template: _ordercomplete_template_1.orderComplete
             }];
-            return [4
-            /*yield*/
-            , axios_1["default"].get("/bc-api/v3/content/scripts?channel_id=" + integrationState.managedChannelId + "&api_client_id=" + config_1["default"].CLIENT_ID)];
-
-          case 2:
-            existingScripts = _a.sent().data;
-            console.log("existingScripts", existingScripts);
             addedScripts = [];
             _i = 0, scriptTags_1 = scriptTags;
-            _a.label = 3;
+            _a.label = 2;
 
-          case 3:
+          case 2:
             if (!(_i < scriptTags_1.length)) return [3
             /*break*/
-            , 6];
+            , 5];
             script = scriptTags_1[_i];
-            console.log(script); // const filteredScriptsList = existingScripts.filter(
-            //     (x) => x.name === script.name
-            // );
-            // // If there is already a script with the same name added by this app, return it instead of creating another one
-            // if (filteredScriptsList.length > 0) {
-            //     addedScripts.push(filteredScriptsList[0]);
-            //     continue;
-            // }
-
-            console.log("herehere");
             templateHTML = script.template;
             scriptHTML = templateHTML.replace(/<%= property_id %>/g, integrationState.platformAnalyticsId);
             scriptCreateRequest = {
@@ -28015,18 +28599,18 @@ var scriptsApi = {
             /*yield*/
             , axios_1["default"].post("/bc-api/v3/content/scripts", scriptCreateRequest)];
 
-          case 4:
+          case 3:
             scriptCreateResponse = _a.sent().data;
             addedScripts.push(scriptCreateResponse);
-            _a.label = 5;
+            _a.label = 4;
 
-          case 5:
+          case 4:
             _i++;
             return [3
             /*break*/
-            , 3];
+            , 2];
 
-          case 6:
+          case 5:
             return [2
             /*return*/
             , addedScripts];
