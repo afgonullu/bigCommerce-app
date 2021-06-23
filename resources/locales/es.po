@@ -1,0 +1,320 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+# Page titles
+
+msgid "Set up %s"
+msgstr "Configurar %s"
+
+msgid "Overview"
+msgstr "Descripción general"
+
+msgid "Analytics"
+msgstr "Analítica"
+
+msgid "Settings"
+msgstr "Ajustes"
+
+# Steps
+
+msgid "Storefront Selection"
+msgstr "Selección de escaparate"
+
+msgid "Requirements"
+msgstr "Requisitos"
+
+msgid "Connection"
+msgstr "Conexión"
+
+# Alert titles
+
+msgid "Success"
+msgstr "Éxito"
+
+msgid "Error"
+msgstr "Error"
+
+# Alert messages
+
+msgid "Please select a store first."
+msgstr "Primero seleccione una tienda."
+
+msgid "Unable to fetch data. Please try again."
+msgstr "No se pudieron recuperar los datos. Inténtalo de nuevo."
+
+msgid "Unable to authenticate with %s."
+msgstr "No se puede autenticar con %s."
+
+msgid "Unable to fetch %s."
+msgstr "No se pudo recuperar %s."
+
+msgid "An error occurred while starting sync: %s"
+msgstr "Se produjo un error al iniciar la sincronización: %s"
+
+msgid "Catalog sync has started."
+msgstr "Se inició la sincronización del catálogo."
+
+msgid "An error occurred while checking sync: %s"
+msgstr "Se produjo un error al verificar la sincronización: %s"
+
+msgid "Unable to select storefront. Please try again."
+msgstr "No se puede seleccionar el escaparate. Inténtalo de nuevo."
+
+msgid "Unable to select site. Please try again."
+msgstr "No se puede seleccionar el sitio. Inténtalo de nuevo."
+
+msgid "Analytics events have been enabled."
+msgstr "Se han habilitado los eventos de análisis."
+
+msgid "Unable to connect analytics. Please try again."
+msgstr "No se puede conectar la analítica. Inténtalo de nuevo."
+
+msgid "Unable to update. Please try again."
+msgstr "No se puede actualizar. Inténtalo de nuevo."
+
+# Button text
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Connect with %s"
+msgstr "Conéctese con %s"
+
+msgid "Switch account"
+msgstr "Cambiar cuenta"
+
+msgid "Manage"
+msgstr "Gestionar"
+
+msgid "Add products"
+msgstr "Agregar productos"
+
+msgid "Stop sync"
+msgstr "Detener sincronización"
+
+msgid "Activate channel"
+msgstr "Activar canal"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Create an Ad"
+msgstr "Crear un Anuncio"
+
+# Link text
+
+msgid "Learn more"
+msgstr "Aprende más"
+
+msgid "Create new"
+msgstr "Crear nueva"
+
+# Badge text
+
+msgid "connected"
+msgstr "conectado"
+
+msgid "disconnected"
+msgstr "desconectada"
+
+msgid "enabled"
+msgstr "activada"
+
+msgid "disabled"
+msgstr "discapacitada"
+
+# Table column headers
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Pages"
+msgstr "Paginas"
+
+msgid "Location"
+msgstr "Localización"
+
+msgid "Status"
+msgstr "Estado"
+
+# Page content
+
+msgid "Storefront"
+msgstr "Escaparate"
+
+msgid "Select storefront to sync with"
+msgstr "Seleccione storefront para sincronizar"
+
+msgid "Products from this storefront will be used in the channel"
+msgstr "Los productos de esta tienda se utilizarán en el canal"
+
+msgid "Select Storefront"
+msgstr "Seleccionar escaparate"
+
+msgid "Complete all requirements to connect to %s"
+msgstr "Complete todos los requisitos para conectarse a %s"
+
+msgid "%s requirements"
+msgstr "Requisitos de %s"
+
+msgid "Store default currency is set to USD"
+msgstr "La moneda predeterminada de la tienda está establecida en USD"
+
+msgid "Storefront has set USD as default currency"
+msgstr "Storefront ha establecido USD como moneda predeterminada"
+
+msgid "Connect your %s account with BigCommerce to complete setting up this channel."
+msgstr "Conecte su cuenta de %s con BigCommerce para completar la configuración de este canal."
+
+msgid "%s account"
+msgstr "Cuenta %s"
+
+msgid "Select the account to connect to your storefront"
+msgstr "Seleccione la cuenta para conectarse a su tienda"
+
+msgid "We'll create a shopping feed inside this account"
+msgstr "Crearemos un feed de compras dentro de esta cuenta."
+
+msgid "Select account"
+msgstr "Seleccionar cuenta"
+
+msgid "Get started by adding products"
+msgstr "Comience agregando productos"
+
+msgid "Once your BigCommerce products are synced to %s, they will be available within search results. Changes made to your products on BigCommerce will be synced daily and updated on %s."
+msgstr "Una vez que sus productos de BigCommerce estén sincronizados con %s, estarán disponibles en los resultados de búsqueda. Los cambios realizados en sus productos en BigCommerce se sincronizarán a diario y se actualizarán en %s."
+
+msgid "While the feed is being processed in the background you can leave this screen and come back later when it's complete."
+msgstr "Mientras se procesa el feed en segundo plano, puede salir de esta pantalla y volver más tarde cuando esté completo."
+
+msgid "Fetching %s of %s pages of products from BigCommerce"
+msgstr "Obteniendo %s de %s páginas de productos de BigCommerce"
+
+msgid "Writing %s of %s product variants into %s"
+msgstr "Escribir %s de %s variantes de producto en %s"
+
+msgid "Activating %s channel"
+msgstr "Activando el canal de %s"
+
+msgid "Redirecting to Channel Manager"
+msgstr "Redirigiendo a Channel Manager"
+
+msgid "Connecting"
+msgstr "Conectando"
+
+msgid "Unable to create %s channel: %s"
+msgstr "No se pudo crear el canal de %s: %s"
+
+msgid "Connect storefronts to %s"
+msgstr "Conectar escaparates a %s"
+
+msgid "Header"
+msgstr "Encabezamiento"
+
+msgid "Footer"
+msgstr "Pie de página"
+
+msgid "Storefront Pages"
+msgstr "Páginas de escaparate"
+
+msgid "All Pages"
+msgstr "Todas las páginas"
+
+msgid "Checkout Page"
+msgstr "Página de pago"
+
+msgid "Order Confirmation Page"
+msgstr "Página de confirmación de pedido"
+
+msgid "Property ID"
+msgstr "Property ID"
+
+msgid "This is the ID that %s uses to identity your site"
+msgstr "Este es el ID que utiliza %s para identificar su sitio"
+
+msgid "Events"
+msgstr "Eventos"
+
+msgid "To enable %s tracking events for your storefront, connect an existing analytics property or create a new one."
+msgstr "Para habilitar el seguimiento de eventos de %s para su escaparate, conecte una propiedad de análisis existente o cree una nueva."
+
+msgid "These are tracking events for %s that are loaded via script tags on your storefront."
+msgstr "Estos son eventos de seguimiento para %s que se cargan a través de etiquetas de secuencia de comandos en su escaparate."
+
+msgid "No analytics events added yet."
+msgstr "Aún no se agregaron eventos de análisis."
+
+msgid "Connect a Property ID above to add events to your storefront."
+msgstr "Conecte un ID de propiedad arriba para agregar eventos a su escaparate."
+
+# Script Tag Names
+
+msgid "Base Code"
+msgstr "Código base"
+
+msgid "Advanced Matching"
+msgstr "Coincidencia avanzada"
+
+msgid "Add to Cart Event"
+msgstr "Agregar al carrito de eventos"
+
+msgid "Start Checkout Event"
+msgstr "Iniciar evento de pago"
+
+msgid "Purchase Event"
+msgstr "Evento de compra"
+
+msgid "View Product Event"
+msgstr "Ver evento de producto"
+
+# API errors
+
+msgid "A storefront must be selected before the marketing channel is created."
+msgstr "Se debe seleccionar un escaparate antes de que se cree el canal de marketing."
+
+msgid "Couldn't fetch the list of your channels."
+msgstr "No se pudo recuperar la lista de tus canales."
+
+msgid "Couldn't create a new channel."
+msgstr "No se pudo crear un canal nuevo."
+
+# TikTok
+
+msgid "Business Center"
+msgstr "Centro de Negocios"
+
+msgid "Business Name"
+msgstr "Nombre del Negocio"
+
+msgid "The Business Center that owns all your ad accounts"
+msgstr "El centro de negocios que posee todas sus cuentas publicitarias"
+
+msgid "Account Name"
+msgstr "Nombre de la cuenta"
+
+msgid "Ad Account"
+msgstr "Cuenta Publicitaria"
+
+msgid "Create ads with your TikTok For Business ad account"
+msgstr "Cree anuncios con su cuenta publicitaria de TikTok For Business"
+
+msgid "Advanced matching enabled"
+msgstr "Centro de Negocios"
+
+msgid "Advanced matching disabled"
+msgstr "Coincidencia avanzada inhabilitada"
+
+msgid "TikTok uses your customer data to target products, page posts, and ads to your customers"
+msgstr "TikTok utiliza los datos de sus clientes para orientar productos, publicaciones en páginas y anuncios a sus clientes"
+
+msgid "By enabling advanced matching you agree to share customer details data, which includes email, phone number, name and location. This could increase your retargeting audience, drive better conversion attribution, and improve your campaign performance."
+msgstr "Al habilitar la coincidencia avanzada, acepta compartir los datos de los detalles del cliente, que incluyen correo electrónico, número de teléfono, nombre y ubicación. Esto podría aumentar su audiencia de reorientación, generar una mejor atribución de conversiones y mejorar el rendimiento de su campaña."
+
+msgid "Couldn't create a new channel."
+msgstr "No se pudo crear un canal nuevo."
+
+msgid "View our Terms and Conditions"
+msgstr "Ver nuestros términos y condiciones"
