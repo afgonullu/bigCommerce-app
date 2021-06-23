@@ -22785,6 +22785,8 @@ var Overview_1 = __importDefault(__webpack_require__(/*! ./pages/Overview/Overvi
 
 var useAlertsManager_1 = __webpack_require__(/*! ./hooks/useAlertsManager */ "./resources/js/hooks/useAlertsManager.ts");
 
+var FakeAuthPage_1 = __importDefault(__webpack_require__(/*! ./pages/FakeAuthPage */ "./resources/js/pages/FakeAuthPage.tsx"));
+
 exports.queryClient = new react_query_1.QueryClient({
   defaultOptions: {
     queries: {
@@ -22811,6 +22813,9 @@ var App = function App() {
   }, react_1["default"].createElement(AppGlobalStyles, null), react_1["default"].createElement(big_design_1.GlobalStyles, null), react_1["default"].createElement(big_design_1.AlertsManager, {
     manager: alertsManager
   }), react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/fake_auth_page",
+    component: FakeAuthPage_1["default"]
+  }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/overview",
     component: Overview_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
@@ -24913,6 +24918,7 @@ var useNextStepRedirect = function useNextStepRedirect() {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            console.log(body);
             return [4
             /*yield*/
             , onboardState_1["default"].setOnboardedState(body)];
@@ -25659,10 +25665,12 @@ var scripts_1 = __importDefault(__webpack_require__(/*! ../services/scripts */ "
 var useUpsertChannel = function useUpsertChannel() {
   return react_1.useCallback(function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var data, response;
+      var data, response, error_1;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            _a.trys.push([0, 4,, 5]);
+
             return [4
             /*yield*/
             , onboardState_1["default"].getOnboardedState()];
@@ -25682,7 +25690,20 @@ var useUpsertChannel = function useUpsertChannel() {
           case 3:
             _a.sent();
 
+            console.log(response);
             window.location.href = response.channel_manager_url;
+            return [3
+            /*break*/
+            , 5];
+
+          case 4:
+            error_1 = _a.sent();
+            console.log(error_1);
+            return [3
+            /*break*/
+            , 5];
+
+          case 5:
             return [2
             /*return*/
             ];
@@ -25715,6 +25736,58 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 
 __webpack_require__(/*! ./App */ "./resources/js/App.tsx");
+
+/***/ }),
+
+/***/ "./resources/js/pages/FakeAuthPage.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/FakeAuthPage.tsx ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var FakeAuthPage = function FakeAuthPage() {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement("div", {
+    style: {
+      position: "fixed",
+      width: "100%",
+      height: "100%",
+      top: 0,
+      left: 0
+    }
+  }, react_1["default"].createElement("button", {
+    style: {
+      margin: "0 auto",
+      fontSize: "16px",
+      padding: "1rem",
+      width: "78%",
+      marginTop: "10%",
+      marginLeft: "10%"
+    },
+    onClick: function onClick() {
+      window.opener.postMessage({
+        code: "test"
+      }, "*");
+      window.close();
+    }
+  }, "Log into Platform")));
+};
+
+exports.default = FakeAuthPage;
 
 /***/ }),
 
@@ -25978,45 +26051,82 @@ var Connect = function Connect() {
 
   var connect = react_1.useCallback(function () {
     return __awaiter(void 0, void 0, void 0, function () {
-      var data, newState, userData, error_1;
       return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            _a.trys.push([0, 2,, 3]);
+        // try {
+        //     console.log("starting");
+        //     const data = await exchangeAuthCode(456);
+        //     const newState: OnboardedState = {
+        //         ...data,
+        //         status: "step_connection_ready",
+        //     };
+        //     const userData = JSON.parse(data.platformUserProfile!);
+        //     setUserProfile({
+        //         email: userData.email,
+        //         avatar: userData.avatar,
+        //     });
+        //     nextStepRedirect(newState);
+        //     setOnboardedState(newState);
+        //     stopPoller();
+        // } catch (error) {}
+        // const resetState: OnboardedState = {
+        //     ...onboardedState,
+        //     status: "step_connection",
+        // };
+        // nextStepRedirect(resetState);
+        // setOnboardedState(resetState);
+        openPopup();
+        window.addEventListener("message", function (e) {
+          return __awaiter(void 0, void 0, void 0, function () {
+            var data, newState, userData, error_1;
+            return __generator(this, function (_a) {
+              switch (_a.label) {
+                case 0:
+                  console.log("Child Window Message Event: ", e);
+                  _a.label = 1;
 
-            console.log("starting");
-            return [4
-            /*yield*/
-            , exchangeAuthCode(456)];
+                case 1:
+                  _a.trys.push([1, 3,, 4]);
 
-          case 1:
-            data = _a.sent();
-            newState = __assign(__assign({}, data), {
-              status: "step_connection_ready"
+                  return [4
+                  /*yield*/
+                  , exchangeAuthCode(e.data.code)];
+
+                case 2:
+                  data = _a.sent();
+                  console.log("data", data);
+                  newState = __assign(__assign({}, data), {
+                    status: "step_connection_ready"
+                  });
+                  userData = JSON.parse(data.platformUserProfile);
+                  setUserProfile({
+                    email: userData.email,
+                    avatar: userData.avatar
+                  });
+                  setOnboardedState(newState); // nextStepRedirect(onboardedState);
+
+                  stopPoller();
+                  return [3
+                  /*break*/
+                  , 4];
+
+                case 3:
+                  error_1 = _a.sent();
+                  return [3
+                  /*break*/
+                  , 4];
+
+                case 4:
+                  return [2
+                  /*return*/
+                  ];
+              }
             });
-            userData = JSON.parse(data.platformUserProfile);
-            setUserProfile({
-              email: userData.email,
-              avatar: userData.avatar
-            });
-            nextStepRedirect(newState);
-            setOnboardedState(newState);
-            stopPoller();
-            return [3
-            /*break*/
-            , 3];
-
-          case 2:
-            error_1 = _a.sent();
-            return [3
-            /*break*/
-            , 3];
-
-          case 3:
-            return [2
-            /*return*/
-            ];
-        }
+          });
+        }, false);
+        startPoller();
+        return [2
+        /*return*/
+        ];
       });
     });
   }, [startPoller, stopPoller, openPopup, exchangeAuthCode, nextStepRedirect]);
@@ -26024,8 +26134,7 @@ var Connect = function Connect() {
     text: "Switch Account",
     variant: "secondary",
     onClick: connect
-  } : undefined; // useOnboardRedirect();
-
+  } : undefined;
   react_1.useEffect(function () {
     if (authReady && !userProfile && (onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformUserProfile)) {
       var userData = JSON.parse(onboardedState.platformUserProfile);
@@ -27201,12 +27310,14 @@ var channelsApi = {
               }];
             }
 
+            console.log("here");
             return [4
             /*yield*/
             , this.getChannels()];
 
           case 1:
             data = _a.sent().data;
+            console.log(data);
             existingChannel = data.filter(function (channel) {
               var _a, _b;
 
@@ -27857,14 +27968,13 @@ var _ordercomplete_template_1 = __webpack_require__(/*! ../../scripts/storefront
 
 var _startcheckout_template_1 = __webpack_require__(/*! ../../scripts/storefront/_startcheckout.template */ "./resources/scripts/storefront/_startcheckout.template.ts");
 
-var _viewcontent_template_1 = __webpack_require__(/*! ../../scripts/storefront/_viewcontent.template */ "./resources/scripts/storefront/_viewcontent.template.ts");
+var _viewcontent_template_1 = __webpack_require__(/*! ../../scripts/storefront/_viewcontent.template */ "./resources/scripts/storefront/_viewcontent.template.ts"); // import config from "../utils/config";
 
-var config_1 = __importDefault(__webpack_require__(/*! ../utils/config */ "./resources/js/utils/config.ts"));
 
 var scriptsApi = {
   installStorefrontScripts: function installStorefrontScripts() {
     return __awaiter(this, void 0, void 0, function () {
-      var integrationState, scriptTags, existingScripts, addedScripts, _loop_1, _i, scriptTags_1, script;
+      var integrationState, scriptTags, addedScripts, _i, scriptTags_1, script, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
 
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -27912,83 +28022,46 @@ var scriptsApi = {
               visibility: "order_confirmation",
               template: _ordercomplete_template_1.orderComplete
             }];
-            return [4
-            /*yield*/
-            , axios_1["default"].get("/bc-api/v3/content/scripts?channel_id=" + integrationState.managedChannelId + "&api_client_id=" + config_1["default"].CLIENT_ID)];
+            addedScripts = [];
+            _i = 0, scriptTags_1 = scriptTags;
+            _a.label = 2;
 
           case 2:
-            existingScripts = _a.sent().data;
-            addedScripts = [];
-
-            _loop_1 = function _loop_1(script) {
-              var filteredScriptsList, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
-              return __generator(this, function (_b) {
-                switch (_b.label) {
-                  case 0:
-                    filteredScriptsList = existingScripts.filter(function (x) {
-                      return x.name === script.name;
-                    }); // If there is already a script with the same name added by this app, return it instead of creating another one
-
-                    if (filteredScriptsList.length > 0) {
-                      addedScripts.push(filteredScriptsList[0]);
-                      return [2
-                      /*return*/
-                      , "continue"];
-                    }
-
-                    templateHTML = script.template;
-                    scriptHTML = templateHTML.replace(/<%= property_id %>/g, integrationState.platformAnalyticsId);
-                    scriptCreateRequest = {
-                      channel_id: integrationState.storefrontChannelId,
-                      name: script.name,
-                      description: script.description,
-                      html: scriptHTML,
-                      auto_uninstall: true,
-                      load_method: "default",
-                      location: script.location,
-                      visibility: script.visibility,
-                      kind: "script_tag",
-                      consent_category: "analytics",
-                      enabled: true
-                    };
-                    return [4
-                    /*yield*/
-                    , axios_1["default"].post("/bc-api/v3/content/scripts", scriptCreateRequest)];
-
-                  case 1:
-                    scriptCreateResponse = _b.sent().data;
-                    addedScripts.push(scriptCreateResponse);
-                    return [2
-                    /*return*/
-                    ];
-                }
-              });
-            };
-
-            _i = 0, scriptTags_1 = scriptTags;
-            _a.label = 3;
-
-          case 3:
             if (!(_i < scriptTags_1.length)) return [3
             /*break*/
-            , 6];
+            , 5];
             script = scriptTags_1[_i];
-            return [5
-            /*yield**/
-            , _loop_1(script)];
+            templateHTML = script.template;
+            scriptHTML = templateHTML.replace(/<%= property_id %>/g, integrationState.platformAnalyticsId);
+            scriptCreateRequest = {
+              channel_id: integrationState.storefrontChannelId,
+              name: script.name,
+              description: script.description,
+              html: scriptHTML,
+              auto_uninstall: true,
+              load_method: "default",
+              location: script.location,
+              visibility: script.visibility,
+              kind: "script_tag",
+              consent_category: "analytics",
+              enabled: true
+            };
+            return [4
+            /*yield*/
+            , axios_1["default"].post("/bc-api/v3/content/scripts", scriptCreateRequest)];
+
+          case 3:
+            scriptCreateResponse = _a.sent().data;
+            addedScripts.push(scriptCreateResponse);
+            _a.label = 4;
 
           case 4:
-            _a.sent();
-
-            _a.label = 5;
-
-          case 5:
             _i++;
             return [3
             /*break*/
-            , 3];
+            , 2];
 
-          case 6:
+          case 5:
             return [2
             /*return*/
             , addedScripts];
@@ -28190,6 +28263,16 @@ var getRequiredData = function getRequiredData() {
           _a = _b.sent(), managedChannelId = _a.managedChannelId, platformBusinessId = _a.platformBusinessId, storefrontChannelId = _a.storefrontChannelId, platformAccessToken = _a.platformAccessToken, store_hash = _a.store_hash;
           syncEngineBaseUrl = config_1["default"].SYNC_ENGINE_BASE_URL;
           channelPlatform = config_1["default"].NEXT_PUBLIC_CHANNEL_PLATFORM;
+          console.log({
+            accessToken: accessToken,
+            managedChannelId: managedChannelId,
+            platformBusinessId: platformBusinessId,
+            storefrontChannelId: storefrontChannelId,
+            platformAccessToken: platformAccessToken,
+            store_hash: store_hash,
+            syncEngineBaseUrl: syncEngineBaseUrl,
+            channelPlatform: channelPlatform
+          });
           return [2
           /*return*/
           , {
@@ -28226,6 +28309,7 @@ var syncApi = {
               throw new Error("Missing Client ID");
             }
 
+            console.log("have client id");
             headers = {
               "X-Auth-Client": config_1["default"].CLIENT_ID,
               "X-Auth-Token": accessToken,
@@ -28242,6 +28326,7 @@ var syncApi = {
               storefront_channel_id: storefrontChannelId.toString(),
               destination_channel_id: managedChannelId.toString()
             };
+            console.log("posting");
             return [4
             /*yield*/
             , axios_1["default"].post(syncEngineBaseUrl + "/" + (store_hash === null || store_hash === void 0 ? void 0 : store_hash.substr(7)) + "/" + channelPlatform + "/sync", body, {
@@ -28250,6 +28335,7 @@ var syncApi = {
 
           case 2:
             result = _b.sent();
+            console.log(result);
             return [2
             /*return*/
             , result];
@@ -28368,7 +28454,7 @@ exports.default = syncApi;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-var NEXT_PUBLIC_CHANNEL_NAME = "AFGTOK10";
+var NEXT_PUBLIC_CHANNEL_NAME = "AFGTOK41";
 var NEXT_PUBLIC_CHANNEL_TYPE = "marketing";
 var NEXT_PUBLIC_CHANNEL_PLATFORM = "custom";
 var NEXT_PUBLIC_CHANNEL_LISTABLE_FROM_UI = "false";

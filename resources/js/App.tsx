@@ -9,6 +9,7 @@ import Onboard from "./pages/Onboard/Onboard";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Overview from "./pages/Overview/Overview";
 import { useAlertsManager } from "./hooks/useAlertsManager";
+import FakeAuthPage from "./pages/FakeAuthPage";
 
 export const queryClient = new QueryClient({
     defaultOptions: {
@@ -42,6 +43,10 @@ const App: React.FC = () => {
                         <AlertsManager manager={alertsManager} />
                         <BrowserRouter>
                             <Switch>
+                                <Route
+                                    path="/fake_auth_page"
+                                    component={FakeAuthPage}
+                                />
                                 <Route path="/overview" component={Overview} />
                                 <Route path="/onboard" component={Onboard} />
                                 <Route path="/" component={Onboard} />

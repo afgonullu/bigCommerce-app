@@ -38,22 +38,22 @@ const Connect: React.FC = () => {
     // const [addAlert] = useAlert();
 
     const connect = useCallback(async () => {
-        try {
-            console.log("starting");
-            const data = await exchangeAuthCode(456);
-            const newState: OnboardedState = {
-                ...data,
-                status: "step_connection_ready",
-            };
-            const userData = JSON.parse(data.platformUserProfile!);
-            setUserProfile({
-                email: userData.email,
-                avatar: userData.avatar,
-            });
-            nextStepRedirect(newState);
-            setOnboardedState(newState);
-            stopPoller();
-        } catch (error) {}
+        // try {
+        //     console.log("starting");
+        //     const data = await exchangeAuthCode(456);
+        //     const newState: OnboardedState = {
+        //         ...data,
+        //         status: "step_connection_ready",
+        //     };
+        //     const userData = JSON.parse(data.platformUserProfile!);
+        //     setUserProfile({
+        //         email: userData.email,
+        //         avatar: userData.avatar,
+        //     });
+        //     nextStepRedirect(newState);
+        //     setOnboardedState(newState);
+        //     stopPoller();
+        // } catch (error) {}
         // const resetState: OnboardedState = {
         //     ...onboardedState,
         //     status: "step_connection",
@@ -61,32 +61,35 @@ const Connect: React.FC = () => {
         // nextStepRedirect(resetState);
         // setOnboardedState(resetState);
 
-        // openPopup();
+        openPopup();
 
-        // window.addEventListener(
-        //     "message",
-        //     async (e) => {
-        //         console.log("Child Window Message Event: ", e);
+        window.addEventListener(
+            "message",
+            async (e) => {
+                console.log("Child Window Message Event: ", e);
 
-        //         try {
-        //             console.log("starting");
-        //             const { email, avatar } = await exchangeAuthCode(
-        //                 e.data.code
-        //             );
-        //             const newState: OnboardedState = {
-        //                 ...onboardedState,
-        //                 status: "step_connection_ready",
-        //             };
-        //             setUserProfile({ email, avatar });
-        //             nextStepRedirect(newState);
-        //             setOnboardedState(newState);
-        //             stopPoller();
-        //         } catch (error) {}
-        //     },
-        //     false
-        // );
+                try {
+                    const data = await exchangeAuthCode(e.data.code);
+                    console.log("data", data);
+                    const newState: OnboardedState = {
+                        ...data,
+                        status: "step_connection_ready",
+                    };
 
-        // startPoller();
+                    const userData = JSON.parse(data.platformUserProfile!);
+                    setUserProfile({
+                        email: userData.email,
+                        avatar: userData.avatar,
+                    });
+                    setOnboardedState(newState);
+                    // nextStepRedirect(onboardedState);
+                    stopPoller();
+                } catch (error) {}
+            },
+            false
+        );
+
+        startPoller();
     }, [
         startPoller,
         stopPoller,
@@ -102,8 +105,6 @@ const Connect: React.FC = () => {
               onClick: connect,
           }
         : undefined;
-
-    // useOnboardRedirect();
 
     useEffect(() => {
         if (authReady && !userProfile && onboardedState?.platformUserProfile) {

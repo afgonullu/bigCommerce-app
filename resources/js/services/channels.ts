@@ -71,9 +71,7 @@ const channelsApi = {
                 },
             };
 
-
             const response = await axios.post("/bc-api/v3/channels", channel);
-
 
             const createdChannelId = response.data.data.id;
             const channelManagerUrl = `https://store-${storeHash.substr(

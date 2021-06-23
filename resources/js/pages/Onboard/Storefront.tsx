@@ -10,8 +10,9 @@ import channelsApi from "../../services/channels";
 const Storefront: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectOptions, setSelectOptions] = useState([]);
-    const [selectedStorefront, setSelectedStorefront] =
-        useState<number | undefined>(undefined);
+    const [selectedStorefront, setSelectedStorefront] = useState<
+        number | undefined
+    >(undefined);
     const nextStepRedirect = useNextStepRedirect();
 
     useEffect(() => {
