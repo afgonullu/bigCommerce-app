@@ -5,9 +5,10 @@ import { Sync } from "../../interfaces/sync";
 import SyncOverview from "../SyncOverview";
 import config from "../../utils/config";
 import syncApi from "../../services/sync";
+import { useAlert } from "../../hooks/useAlert";
 
 const CatalogSync: React.FC = () => {
-    // const [addAlert] = useAlert();
+    const [addAlert] = useAlert();
     const [syncDataIsLoading, setSyncDataIsLoading] = useState(false);
     const [syncData, setSyncData] = useState<Sync>({
         status: null,
@@ -35,11 +36,11 @@ const CatalogSync: React.FC = () => {
                     setSyncDataIsLoading(false);
                 }
             } catch (error) {
-                // addAlert({
-                //     header: gettext("Error"),
-                //     body: gettext("An error occured while fetching sync"),
-                //     type: "error",
-                // });
+                addAlert({
+                    header: "Error",
+                    body: "An error occured while fetching sync",
+                    type: "error",
+                });
 
                 if (showLoadingIndicator) {
                     setSyncDataIsLoading(false);
@@ -57,18 +58,18 @@ const CatalogSync: React.FC = () => {
             setSyncData(result);
             checkSyncStatus();
             setSyncDataIsLoading(false);
-            // addAlert({
-            //     header: gettext("Success"),
-            //     body: gettext("Catalog sync has started"),
-            //     type: "success",
-            // });
+            addAlert({
+                header: "Success",
+                body: "Catalog sync has started",
+                type: "success",
+            });
         } catch (error) {
             setSyncDataIsLoading(false);
-            // addAlert({
-            //     header: gettext("Error"),
-            //     body: gettext("An error occured while starting sync"),
-            //     type: "error",
-            // });
+            addAlert({
+                header: "Error",
+                body: "An error occured while starting sync",
+                type: "error",
+            });
         }
     }, [checkSyncStatus]);
 

@@ -18,8 +18,9 @@ import { onboardStateApi } from "../../services";
 import config from "../../utils/config";
 
 const Connect: React.FC = () => {
-    const [onboardedState, setOnboardedState] =
-        useState<OnboardedState | null>(null);
+    const [onboardedState, setOnboardedState] = useState<OnboardedState | null>(
+        null
+    );
     const [isLoading, setIsLoading] = useState(false);
     const authReady = onboardedState?.status === "step_connection_ready";
     const {
@@ -27,8 +28,10 @@ const Connect: React.FC = () => {
         stopPoller,
         isPolling: isConnecting,
     } = useStatusPoller();
-    const [userProfile, setUserProfile] =
-        useState<{ email: string; avatar: string } | null>(null);
+    const [userProfile, setUserProfile] = useState<{
+        email: string;
+        avatar: string;
+    } | null>(null);
     const nextStepRedirect = useNextStepRedirect();
     const openPopup = useConnectPopup();
     const exchangeAuthCode = useExchangeAuthCode();

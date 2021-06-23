@@ -23864,6 +23864,8 @@ var useNextStepRedirect_1 = __importDefault(__webpack_require__(/*! ../hooks/use
 
 var useUpsertChannel_1 = __importDefault(__webpack_require__(/*! ../hooks/useUpsertChannel */ "./resources/js/hooks/useUpsertChannel.ts"));
 
+var useAlert_1 = __webpack_require__(/*! ../hooks/useAlert */ "./resources/js/hooks/useAlert.ts");
+
 var StyledFlex = styled_components_1["default"](big_design_1.Box)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n    bottom: 0;\n    left: 0;\n    position: fixed;\n    width: 100%;\n"], ["\n    bottom: 0;\n    left: 0;\n    position: fixed;\n    width: 100%;\n"])));
 
 var OnboardingActionBar = function OnboardingActionBar(_a) {
@@ -23878,7 +23880,8 @@ var OnboardingActionBar = function OnboardingActionBar(_a) {
       creatingChannel = _b[0],
       setCreatingChannel = _b[1];
 
-  var upsertChannel = useUpsertChannel_1["default"](); // const [addAlert] = useAlert();
+  var upsertChannel = useUpsertChannel_1["default"]();
+  var addAlert = useAlert_1.useAlert()[0];
 
   var onContinue = function onContinue() {
     return __awaiter(void 0, void 0, void 0, function () {
@@ -23921,7 +23924,11 @@ var OnboardingActionBar = function OnboardingActionBar(_a) {
 
           case 4:
             error_1 = _a.sent();
-            console.log("error occured");
+            addAlert({
+              header: "Error",
+              body: "Unable to create channel.",
+              type: "error"
+            });
             return [3
             /*break*/
             , 5];
@@ -24415,8 +24422,11 @@ var config_1 = __importDefault(__webpack_require__(/*! ../../utils/config */ "./
 
 var sync_1 = __importDefault(__webpack_require__(/*! ../../services/sync */ "./resources/js/services/sync.ts"));
 
+var useAlert_1 = __webpack_require__(/*! ../../hooks/useAlert */ "./resources/js/hooks/useAlert.ts");
+
 var CatalogSync = function CatalogSync() {
-  // const [addAlert] = useAlert();
+  var addAlert = useAlert_1.useAlert()[0];
+
   var _a = react_1.useState(false),
       syncDataIsLoading = _a[0],
       setSyncDataIsLoading = _a[1];
@@ -24467,11 +24477,12 @@ var CatalogSync = function CatalogSync() {
             , 4];
 
           case 3:
-            error_1 = _a.sent(); // addAlert({
-            //     header: gettext("Error"),
-            //     body: gettext("An error occured while fetching sync"),
-            //     type: "error",
-            // });
+            error_1 = _a.sent();
+            addAlert({
+              header: "Error",
+              body: "An error occured while fetching sync",
+              type: "error"
+            });
 
             if (showLoadingIndicator) {
               setSyncDataIsLoading(false);
@@ -24510,6 +24521,11 @@ var CatalogSync = function CatalogSync() {
             setSyncData(result);
             checkSyncStatus();
             setSyncDataIsLoading(false);
+            addAlert({
+              header: "Success",
+              body: "Catalog sync has started",
+              type: "success"
+            });
             return [3
             /*break*/
             , 4];
@@ -24517,6 +24533,11 @@ var CatalogSync = function CatalogSync() {
           case 3:
             error_2 = _a.sent();
             setSyncDataIsLoading(false);
+            addAlert({
+              header: "Error",
+              body: "An error occured while starting sync",
+              type: "error"
+            });
             return [3
             /*break*/
             , 4];
@@ -24600,7 +24621,7 @@ var CatalogSync = function CatalogSync() {
       variant: "primary",
       isLoading: syncDataIsLoading,
       iconRight: react_1["default"].createElement(big_design_icons_1.ArrowDropDownIcon, null)
-    }, "\"Manage\""),
+    }, "Manage"),
     content: {
       notRunning: "Once your BigCommerce products are synced to " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME + ", they will be available within search results. Changes made to your products on BigCommerce will be synced daily and updated on " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME,
       processing: "While the feed is being processed in the background you can leave this screen and come back later when it's complete.",
@@ -25057,6 +25078,80 @@ var SyncStatusBlock = function SyncStatusBlock(_a) {
 };
 
 exports.default = SyncStatusBlock;
+
+/***/ }),
+
+/***/ "./resources/js/hooks/useAlert.ts":
+/*!****************************************!*\
+  !*** ./resources/js/hooks/useAlert.ts ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useAlert = void 0;
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var useAlertsManager_1 = __webpack_require__(/*! ./useAlertsManager */ "./resources/js/hooks/useAlertsManager.ts");
+
+function useAlert() {
+  var alertsManager = useAlertsManager_1.useAlertsManager();
+  var getAlert = react_1.useCallback(function (config) {
+    return {
+      header: config.header,
+      messages: [{
+        text: config.body
+      }],
+      type: config.type,
+      autoDismiss: config.type === "success",
+      key: "ajaxFeedback"
+    };
+  }, []);
+  var add = react_1.useCallback(function (config) {
+    var alert = getAlert(config);
+    alertsManager.add(alert);
+  }, [getAlert, alertsManager]);
+  var remove = react_1.useCallback(function () {
+    alertsManager.remove("ajaxFeedback");
+  }, [alertsManager]);
+  return [add, remove];
+}
+
+exports.useAlert = useAlert;
+
+/***/ }),
+
+/***/ "./resources/js/hooks/useAlertsManager.ts":
+/*!************************************************!*\
+  !*** ./resources/js/hooks/useAlertsManager.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useAlertsManager = void 0;
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+function useAlertsManager() {
+  var alertsManager = react_1.useMemo(function () {
+    return big_design_1.createAlertsManager();
+  }, []);
+  return alertsManager;
+}
+
+exports.useAlertsManager = useAlertsManager;
 
 /***/ }),
 

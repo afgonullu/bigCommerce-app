@@ -7,6 +7,7 @@ import { OnboardedState } from "../interfaces/interfaces";
 import { useOnboardingSteps } from "../hooks/useOnboardingSteps";
 import useNextStepRedirect from "../hooks/useNextStepRedirect";
 import useUpsertChannel from "../hooks/useUpsertChannel";
+import { useAlert } from "../hooks/useAlert";
 
 interface Props {
     currentStep: number;
@@ -31,7 +32,7 @@ const OnboardingActionBar: React.FC<Props> = ({
     const nextStepRedirect = useNextStepRedirect();
     const [creatingChannel, setCreatingChannel] = useState(false);
     const upsertChannel = useUpsertChannel();
-    // const [addAlert] = useAlert();
+    const [addAlert] = useAlert();
 
     const onContinue = async () => {
         const nextStepIndex = currentStep + 1;
@@ -54,12 +55,11 @@ const OnboardingActionBar: React.FC<Props> = ({
             try {
                 await upsertChannel();
             } catch (error) {
-                console.log("error occured");
-                //         // addAlert({
-                //         //     header: "Error",
-                //         //     body: "Unable to create channel.",
-                //         //     type: "error",
-                //         // });
+                addAlert({
+                    header: "Error",
+                    body: "Unable to create channel.",
+                    type: "error",
+                });
             }
 
             setCreatingChannel(false);
