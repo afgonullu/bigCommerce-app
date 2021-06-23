@@ -24207,6 +24207,454 @@ exports.default = BusinessCenter;
 
 /***/ }),
 
+/***/ "./resources/js/components/Overview/CatalogSync.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Overview/CatalogSync.tsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_icons_1 = __webpack_require__(/*! @bigcommerce/big-design-icons */ "./node_modules/@bigcommerce/big-design-icons/dist/es/index.js");
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SyncOverview_1 = __importDefault(__webpack_require__(/*! ../SyncOverview */ "./resources/js/components/SyncOverview.tsx"));
+
+var config_1 = __importDefault(__webpack_require__(/*! ../../utils/config */ "./resources/js/utils/config.ts"));
+
+var sync_1 = __importDefault(__webpack_require__(/*! ../../services/sync */ "./resources/js/services/sync.ts"));
+
+var CatalogSync = function CatalogSync() {
+  // const [addAlert] = useAlert();
+  var _a = react_1.useState(false),
+      syncDataIsLoading = _a[0],
+      setSyncDataIsLoading = _a[1];
+
+  var _b = react_1.useState({
+    status: null,
+    processed_objects: 0,
+    total_objects: 0,
+    platform: "bigcommerce"
+  }),
+      syncData = _b[0],
+      setSyncData = _b[1];
+
+  var syncIsRunning = syncData.status !== null && syncData.status !== "complete" && syncData.status !== "stopped" && syncData.status !== "error";
+  var checkSyncStatus = react_1.useCallback(function (showLoadingIndicator) {
+    if (showLoadingIndicator === void 0) {
+      showLoadingIndicator = false;
+    }
+
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result, error_1;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            if (showLoadingIndicator) {
+              setSyncDataIsLoading(true);
+            }
+
+            _a.label = 1;
+
+          case 1:
+            _a.trys.push([1, 3,, 4]);
+
+            return [4
+            /*yield*/
+            , sync_1["default"].getSyncStatus()];
+
+          case 2:
+            result = _a.sent();
+            setSyncData(result);
+
+            if (showLoadingIndicator) {
+              setSyncDataIsLoading(false);
+            }
+
+            return [3
+            /*break*/
+            , 4];
+
+          case 3:
+            error_1 = _a.sent(); // addAlert({
+            //     header: gettext("Error"),
+            //     body: gettext("An error occured while fetching sync"),
+            //     type: "error",
+            // });
+
+            if (showLoadingIndicator) {
+              setSyncDataIsLoading(false);
+            }
+
+            return [3
+            /*break*/
+            , 4];
+
+          case 4:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  }, []);
+  var addProducts = react_1.useCallback(function () {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var result, error_2;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            setSyncDataIsLoading(true);
+            _a.label = 1;
+
+          case 1:
+            _a.trys.push([1, 3,, 4]);
+
+            return [4
+            /*yield*/
+            , sync_1["default"].startSync()];
+
+          case 2:
+            result = _a.sent();
+            setSyncData(result);
+            checkSyncStatus();
+            setSyncDataIsLoading(false);
+            return [3
+            /*break*/
+            , 4];
+
+          case 3:
+            error_2 = _a.sent();
+            setSyncDataIsLoading(false);
+            return [3
+            /*break*/
+            , 4];
+
+          case 4:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  }, [checkSyncStatus]);
+
+  var onStopSync = function onStopSync() {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var error_3;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            setSyncDataIsLoading(true);
+            _a.label = 1;
+
+          case 1:
+            _a.trys.push([1, 3,, 4]);
+
+            return [4
+            /*yield*/
+            , sync_1["default"].stopSync()];
+
+          case 2:
+            _a.sent();
+
+            setSyncDataIsLoading(false);
+            return [3
+            /*break*/
+            , 4];
+
+          case 3:
+            error_3 = _a.sent();
+            console.log(error_3);
+            return [3
+            /*break*/
+            , 4];
+
+          case 4:
+            return [2
+            /*return*/
+            ];
+        }
+      });
+    });
+  };
+
+  react_1.useEffect(function () {
+    var timeoutId = 0;
+
+    if (syncIsRunning) {
+      timeoutId = window.setTimeout(function () {
+        return checkSyncStatus();
+      }, 3000);
+    }
+
+    return function () {
+      return clearTimeout(timeoutId);
+    };
+  }, [syncData, checkSyncStatus, syncIsRunning]);
+  react_1.useEffect(function () {
+    checkSyncStatus(true);
+  }, [checkSyncStatus]);
+  return react_1["default"].createElement(SyncOverview_1["default"], {
+    actionItems: [{
+      content: "Add products",
+      onItemClick: addProducts,
+      disabled: syncIsRunning
+    }, {
+      content: "Stop sync",
+      onItemClick: onStopSync,
+      disabled: !syncIsRunning
+    }],
+    actionToggle: react_1["default"].createElement(big_design_1.Button, {
+      variant: "primary",
+      isLoading: syncDataIsLoading,
+      iconRight: react_1["default"].createElement(big_design_icons_1.ArrowDropDownIcon, null)
+    }, "\"Manage\""),
+    content: {
+      notRunning: "Once your BigCommerce products are synced to " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME + ", they will be available within search results. Changes made to your products on BigCommerce will be synced daily and updated on " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME,
+      processing: "While the feed is being processed in the background you can leave this screen and come back later when it's complete.",
+      readingFromBigCommerce: "Fetching " + syncData.processed_objects + " of " + syncData.total_objects + " pages of products from BigCommerce",
+      writingIntoBigCommerce: "Updating " + syncData.processed_objects + " of " + syncData.total_objects + " product variants in " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME,
+      readingFromPlatform: "Fetching " + syncData.processed_objects + " of " + syncData.total_objects + " items from " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME,
+      writingIntoPlatform: "Writing " + syncData.processed_objects + " of " + syncData.total_objects + " product variants into " + config_1["default"].NEXT_PUBLIC_CHANNEL_NAME
+    },
+    header: "Catalog",
+    statsData: [{
+      count: 300,
+      label: "Listed",
+      variant: "primary",
+      onClick: function onClick() {
+        return console.log("Navigate to Listed");
+      }
+    }, {
+      count: 100,
+      label: "Pending",
+      variant: "secondary",
+      onClick: function onClick() {
+        return console.log("Navigate to Pending");
+      }
+    }, {
+      count: 20,
+      label: "Errors",
+      variant: "danger",
+      onClick: function onClick() {
+        return console.log("Navigate to Errors");
+      }
+    }, {
+      count: 15,
+      label: "Issues",
+      variant: "warning",
+      onClick: function onClick() {
+        return console.log("Navigate to Issues");
+      }
+    }, {
+      count: 165,
+      label: "Active",
+      variant: "success",
+      onClick: function onClick() {
+        return console.log("Navigate to Active");
+      }
+    }],
+    syncData: syncData,
+    syncIsRunning: syncIsRunning
+  });
+};
+
+exports.default = CatalogSync;
+
+/***/ }),
+
 /***/ "./resources/js/components/OverviewPanel.tsx":
 /*!***************************************************!*\
   !*** ./resources/js/components/OverviewPanel.tsx ***!
@@ -24439,6 +24887,176 @@ var Requirement = function Requirement(_a) {
 };
 
 exports.default = Requirement;
+
+/***/ }),
+
+/***/ "./resources/js/components/SyncOverview.tsx":
+/*!**************************************************!*\
+  !*** ./resources/js/components/SyncOverview.tsx ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SyncStatusBlock_1 = __importDefault(__webpack_require__(/*! ./SyncStatusBlock */ "./resources/js/components/SyncStatusBlock.tsx"));
+
+var SyncOverview = function SyncOverview(_a) {
+  var header = _a.header,
+      actionItems = _a.actionItems,
+      actionToggle = _a.actionToggle,
+      content = _a.content,
+      statsData = _a.statsData,
+      syncData = _a.syncData,
+      syncIsRunning = _a.syncIsRunning;
+
+  var percentStatus = function percentStatus() {
+    return (syncData === null || syncData === void 0 ? void 0 : syncData.processed_objects) && (syncData === null || syncData === void 0 ? void 0 : syncData.total_objects) ? syncData.processed_objects / syncData.total_objects * 100 : 0;
+  };
+
+  var readableStatus = function readableStatus() {
+    var statusText = "";
+
+    if (syncData.status === "reading") {
+      statusText = syncData.platform === "bigcommerce" ? content.readingFromBigCommerce : content.readingFromPlatform;
+    } else if (syncData.status === "writing") {
+      statusText = syncData.platform === "bigcommerce" ? content.writingIntoBigCommerce : content.writingIntoPlatform;
+    }
+
+    return statusText;
+  };
+
+  return react_1["default"].createElement(big_design_1.Panel, null, react_1["default"].createElement(big_design_1.Flex, null, react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 1,
+    paddingRight: "small"
+  }, react_1["default"].createElement(big_design_1.H2, null, header)), react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0
+  }, react_1["default"].createElement(big_design_1.Dropdown, {
+    items: actionItems,
+    toggle: actionToggle
+  }))), syncIsRunning ? react_1["default"].createElement(big_design_1.Box, {
+    marginVertical: "large"
+  }, react_1["default"].createElement(big_design_1.Small, null, content.processing), syncData.status && react_1["default"].createElement(react_1["default"].Fragment, null, syncData.status !== "writing" && react_1["default"].createElement(big_design_1.ProgressBar, null), syncData.status === "writing" && react_1["default"].createElement(big_design_1.ProgressBar, {
+    percent: percentStatus()
+  })), react_1["default"].createElement(big_design_1.Box, {
+    marginTop: "small"
+  }, react_1["default"].createElement(big_design_1.Small, null, readableStatus()))) : react_1["default"].createElement(big_design_1.Text, null, content.notRunning), !syncIsRunning && statsData && react_1["default"].createElement(big_design_1.Flex, null, statsData.map(function (stat, idx) {
+    return react_1["default"].createElement(big_design_1.FlexItem, {
+      flexGrow: 1,
+      key: "statusBlock" + idx,
+      marginRight: "small"
+    }, react_1["default"].createElement(SyncStatusBlock_1["default"], {
+      count: stat.count,
+      label: stat.label,
+      variant: stat.variant,
+      onClick: stat.onClick
+    }));
+  })));
+};
+
+exports.default = SyncOverview;
+
+/***/ }),
+
+/***/ "./resources/js/components/SyncStatusBlock.tsx":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/SyncStatusBlock.tsx ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var big_design_icons_1 = __webpack_require__(/*! @bigcommerce/big-design-icons */ "./node_modules/@bigcommerce/big-design-icons/dist/es/index.js");
+
+var big_design_theme_1 = __webpack_require__(/*! @bigcommerce/big-design-theme */ "./node_modules/@bigcommerce/big-design-theme/dist/es/index.js");
+
+var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
+
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var SyncStatusBlock = function SyncStatusBlock(_a) {
+  var count = _a.count,
+      label = _a.label,
+      onClick = _a.onClick,
+      variant = _a.variant;
+  var iconProps = variant !== "danger" ? {
+    color: "white",
+    size: "small",
+    style: {
+      backgroundColor: big_design_theme_1.theme.colors[variant],
+      borderRadius: big_design_theme_1.theme.borderRadius.circle,
+      padding: big_design_theme_1.theme.spacing.xxSmall
+    }
+  } : {
+    color: "danger",
+    size: "xLarge"
+  };
+  var extraBoxProps = onClick ? {
+    onClick: onClick,
+    style: {
+      cursor: "pointer"
+    }
+  } : {};
+  return react_1["default"].createElement(big_design_1.Box, __assign({
+    border: "box",
+    borderRadius: "normal",
+    padding: "small"
+  }, extraBoxProps), react_1["default"].createElement(big_design_1.Flex, null, react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0
+  }, variant === "danger" && react_1["default"].createElement(big_design_icons_1.ErrorIcon, __assign({}, iconProps)), variant === "primary" && react_1["default"].createElement(big_design_icons_1.EditIcon, __assign({}, iconProps)), variant === "secondary" && react_1["default"].createElement(big_design_icons_1.VisibilityIcon, __assign({}, iconProps)), variant === "success" && react_1["default"].createElement(big_design_icons_1.CheckIcon, __assign({}, iconProps)), variant === "warning" && react_1["default"].createElement(big_design_icons_1.WarningIcon, __assign({}, iconProps))), react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 1
+  }, react_1["default"].createElement(big_design_1.H4, {
+    marginLeft: "small"
+  }, label)), onClick && react_1["default"].createElement(big_design_1.FlexItem, {
+    flexGrow: 0
+  }, react_1["default"].createElement(big_design_icons_1.ChevronRightIcon, null))), react_1["default"].createElement(big_design_1.H2, {
+    marginLeft: "xxLarge",
+    marginBottom: "none"
+  }, count));
+};
+
+exports.default = SyncStatusBlock;
 
 /***/ }),
 
@@ -26873,6 +27491,8 @@ var Analytics_1 = __importDefault(__webpack_require__(/*! ../../components/Overv
 
 var BusinessCenter_1 = __importDefault(__webpack_require__(/*! ../../components/Overview/BusinessCenter */ "./resources/js/components/Overview/BusinessCenter.tsx"));
 
+var CatalogSync_1 = __importDefault(__webpack_require__(/*! ../../components/Overview/CatalogSync */ "./resources/js/components/Overview/CatalogSync.tsx"));
+
 var PageTitle_1 = __importDefault(__webpack_require__(/*! ../../components/PageTitle */ "./resources/js/components/PageTitle.tsx"));
 
 var services_1 = __webpack_require__(/*! ../../services */ "./resources/js/services/index.ts");
@@ -26926,7 +27546,7 @@ var Overview = function Overview() {
     accountName: onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformAccountId
   }), react_1["default"].createElement(Analytics_1["default"], {
     accountName: onboardedState === null || onboardedState === void 0 ? void 0 : onboardedState.platformAnalyticsId
-  }));
+  }), react_1["default"].createElement(CatalogSync_1["default"], null));
 };
 
 exports.default = Overview;
@@ -28623,6 +29243,361 @@ exports.default = scriptsApi;
 
 /***/ }),
 
+/***/ "./resources/js/services/sync.ts":
+/*!***************************************!*\
+  !*** ./resources/js/services/sync.ts ***!
+  \***************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
+
+var config_1 = __importDefault(__webpack_require__(/*! ../utils/config */ "./resources/js/utils/config.ts"));
+
+var onboardState_1 = __importDefault(__webpack_require__(/*! ./onboardState */ "./resources/js/services/onboardState.ts"));
+
+var getRequiredData = function getRequiredData() {
+  return __awaiter(void 0, void 0, void 0, function () {
+    var accessToken, _a, managedChannelId, platformBusinessId, storefrontChannelId, platformAccessToken, store_hash, syncEngineBaseUrl, channelPlatform;
+
+    return __generator(this, function (_b) {
+      switch (_b.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , axios_1["default"].get("api/accessToken")];
+
+        case 1:
+          accessToken = _b.sent().data;
+          return [4
+          /*yield*/
+          , onboardState_1["default"].getOnboardedState()];
+
+        case 2:
+          _a = _b.sent(), managedChannelId = _a.managedChannelId, platformBusinessId = _a.platformBusinessId, storefrontChannelId = _a.storefrontChannelId, platformAccessToken = _a.platformAccessToken, store_hash = _a.store_hash;
+          syncEngineBaseUrl = config_1["default"].SYNC_ENGINE_BASE_URL;
+          channelPlatform = config_1["default"].NEXT_PUBLIC_CHANNEL_PLATFORM;
+          return [2
+          /*return*/
+          , {
+            accessToken: accessToken,
+            managedChannelId: managedChannelId,
+            platformBusinessId: platformBusinessId,
+            storefrontChannelId: storefrontChannelId,
+            platformAccessToken: platformAccessToken,
+            store_hash: store_hash,
+            syncEngineBaseUrl: syncEngineBaseUrl,
+            channelPlatform: channelPlatform
+          }];
+      }
+    });
+  });
+};
+
+var syncApi = {
+  startSync: function startSync() {
+    return __awaiter(this, void 0, void 0, function () {
+      var _a, accessToken, managedChannelId, platformBusinessId, storefrontChannelId, platformAccessToken, store_hash, syncEngineBaseUrl, channelPlatform, headers, body, result;
+
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , getRequiredData()];
+
+          case 1:
+            _a = _b.sent(), accessToken = _a.accessToken, managedChannelId = _a.managedChannelId, platformBusinessId = _a.platformBusinessId, storefrontChannelId = _a.storefrontChannelId, platformAccessToken = _a.platformAccessToken, store_hash = _a.store_hash, syncEngineBaseUrl = _a.syncEngineBaseUrl, channelPlatform = _a.channelPlatform;
+
+            if (!config_1["default"].CLIENT_ID) {
+              throw new Error("Missing Client ID");
+            }
+
+            headers = {
+              "X-Auth-Client": config_1["default"].CLIENT_ID,
+              "X-Auth-Token": accessToken,
+              "Content-Type": "application/json"
+            };
+
+            if (!platformBusinessId || !storefrontChannelId || !managedChannelId) {
+              throw new Error("Missing platform data");
+            }
+
+            body = {
+              external_platform_account_id: platformBusinessId,
+              external_platform_access_token: platformAccessToken,
+              storefront_channel_id: storefrontChannelId.toString(),
+              destination_channel_id: managedChannelId.toString()
+            };
+            return [4
+            /*yield*/
+            , axios_1["default"].post(syncEngineBaseUrl + "/" + (store_hash === null || store_hash === void 0 ? void 0 : store_hash.substr(7)) + "/" + channelPlatform + "/sync", body, {
+              headers: headers
+            })];
+
+          case 2:
+            result = _b.sent();
+            return [2
+            /*return*/
+            , result];
+        }
+      });
+    });
+  },
+  getSyncStatus: function getSyncStatus() {
+    return __awaiter(this, void 0, void 0, function () {
+      var _a, accessToken, managedChannelId, platformBusinessId, storefrontChannelId, syncEngineBaseUrl, store_hash, channelPlatform, headers, queryStringParams, result;
+
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , getRequiredData()];
+
+          case 1:
+            _a = _b.sent(), accessToken = _a.accessToken, managedChannelId = _a.managedChannelId, platformBusinessId = _a.platformBusinessId, storefrontChannelId = _a.storefrontChannelId, syncEngineBaseUrl = _a.syncEngineBaseUrl, store_hash = _a.store_hash, channelPlatform = _a.channelPlatform;
+
+            if (!config_1["default"].CLIENT_ID) {
+              throw new Error("Missing Client ID");
+            }
+
+            headers = {
+              "X-Auth-Client": config_1["default"].CLIENT_ID,
+              "X-Auth-Token": accessToken
+            };
+
+            if (!platformBusinessId || !storefrontChannelId || !managedChannelId) {
+              throw new Error("Missing platform data");
+            }
+
+            queryStringParams = new URLSearchParams({
+              external_platform_account_id: platformBusinessId,
+              storefront_channel_id: storefrontChannelId.toString(),
+              destination_channel_id: managedChannelId.toString()
+            }).toString();
+            return [4
+            /*yield*/
+            , axios_1["default"].get(syncEngineBaseUrl + "/" + (store_hash === null || store_hash === void 0 ? void 0 : store_hash.substr(7)) + "/" + channelPlatform + "/sync?" + queryStringParams, {
+              headers: headers
+            })];
+
+          case 2:
+            result = _b.sent();
+            return [2
+            /*return*/
+            , result];
+        }
+      });
+    });
+  },
+  stopSync: function stopSync() {
+    return __awaiter(this, void 0, void 0, function () {
+      var _a, accessToken, managedChannelId, platformBusinessId, storefrontChannelId, syncEngineBaseUrl, store_hash, channelPlatform, headers, queryStringParams, result;
+
+      return __generator(this, function (_b) {
+        switch (_b.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , getRequiredData()];
+
+          case 1:
+            _a = _b.sent(), accessToken = _a.accessToken, managedChannelId = _a.managedChannelId, platformBusinessId = _a.platformBusinessId, storefrontChannelId = _a.storefrontChannelId, syncEngineBaseUrl = _a.syncEngineBaseUrl, store_hash = _a.store_hash, channelPlatform = _a.channelPlatform;
+
+            if (!config_1["default"].CLIENT_ID) {
+              throw new Error("Missing Client ID");
+            }
+
+            headers = {
+              "X-Auth-Client": config_1["default"].CLIENT_ID,
+              "X-Auth-Token": accessToken
+            };
+
+            if (!platformBusinessId || !storefrontChannelId || !managedChannelId) {
+              throw new Error("Missing platform data");
+            }
+
+            queryStringParams = new URLSearchParams({
+              external_platform_account_id: platformBusinessId,
+              storefront_channel_id: storefrontChannelId.toString(),
+              destination_channel_id: managedChannelId.toString()
+            }).toString();
+            return [4
+            /*yield*/
+            , axios_1["default"]["delete"](syncEngineBaseUrl + "/" + (store_hash === null || store_hash === void 0 ? void 0 : store_hash.substr(7)) + "/" + channelPlatform + "/sync?" + queryStringParams, {
+              headers: headers
+            })];
+
+          case 2:
+            result = _b.sent();
+            return [2
+            /*return*/
+            , result];
+        }
+      });
+    });
+  }
+};
+exports.default = syncApi;
+
+/***/ }),
+
 /***/ "./resources/js/utils/config.ts":
 /*!**************************************!*\
   !*** ./resources/js/utils/config.ts ***!
@@ -28643,6 +29618,7 @@ var NEXT_PUBLIC_CHANNEL_PLATFORM_CLIENT_ID = "xxxxxxxxxx-123456789";
 var NEXT_PUBLIC_CHANNEL_PLATFORM_AUTH_WINDOW_URL = "/fake_auth_page";
 var APP_ID = "32039";
 var CLIENT_ID = "mk0je0cvfj6ke669pomcnclnuehx4wp";
+var SYNC_ENGINE_BASE_URL = "https://e0d3e194-20ef-4b7b-9606-b1eb5d12c598.trayapp.io";
 exports.default = {
   NEXT_PUBLIC_CHANNEL_LISTABLE_FROM_UI: NEXT_PUBLIC_CHANNEL_LISTABLE_FROM_UI,
   NEXT_PUBLIC_CHANNEL_NAME: NEXT_PUBLIC_CHANNEL_NAME,
@@ -28651,7 +29627,8 @@ exports.default = {
   NEXT_PUBLIC_CHANNEL_PLATFORM_CLIENT_ID: NEXT_PUBLIC_CHANNEL_PLATFORM_CLIENT_ID,
   NEXT_PUBLIC_CHANNEL_TYPE: NEXT_PUBLIC_CHANNEL_TYPE,
   APP_ID: APP_ID,
-  CLIENT_ID: CLIENT_ID
+  CLIENT_ID: CLIENT_ID,
+  SYNC_ENGINE_BASE_URL: SYNC_ENGINE_BASE_URL
 };
 
 /***/ }),

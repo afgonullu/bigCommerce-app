@@ -52,6 +52,7 @@ export interface OnboardedState {
     status: OnboardedStatus;
     storefrontChannelId?: number;
     managedChannelId?: number;
+    platformAccessToken?: string;
     platformBusinessId?: string;
     platformAccountId?: string;
     platformAnalyticsId?: string;

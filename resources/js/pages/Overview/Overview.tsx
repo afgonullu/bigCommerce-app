@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import AdAccount from "../../components/Overview/AdAccount";
 import Analytics from "../../components/Overview/Analytics";
 import BusinessCenter from "../../components/Overview/BusinessCenter";
+import CatalogSync from "../../components/Overview/CatalogSync";
 import PageTitle from "../../components/PageTitle";
 import { OnboardedState } from "../../interfaces/interfaces";
 import { onboardStateApi } from "../../services";
@@ -19,6 +20,7 @@ const Overview: React.FC = () => {
             if (onboardingState.status !== "onboarded") {
                 router.push("/onboard");
             }
+
             setOnboardedState(onboardingState);
         };
         fetch();
@@ -35,7 +37,7 @@ const Overview: React.FC = () => {
             <BusinessCenter accountName={onboardedState?.platformBusinessId} />
             <AdAccount accountName={onboardedState?.platformAccountId} />
             <Analytics accountName={onboardedState?.platformAnalyticsId} />
-            {/* <CatalogSync /> */}
+            <CatalogSync />
         </>
     );
 };
