@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
-import { OnboardedState } from "../interfaces/interfaces";
-import { onboardStateApi } from "../services";
+import { OnboardedState } from "../interfaces/state";
+import onboardStateApi from "../services/onboardState";
 import useNextStepRedirect from "./useNextStepRedirect";
 
 const useOnboardRedirect = () => {
     const [isLoading, setIsLoading] = useState(false);
-    const [onboardedState, setOnboardedState] =
-        useState<OnboardedState | null>(null);
+    const [onboardedState, setOnboardedState] = useState<OnboardedState | null>(
+        null
+    );
     const router = useHistory();
     const match = useRouteMatch();
     const nextStepRedirect = useNextStepRedirect();

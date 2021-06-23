@@ -5,8 +5,8 @@ import Analytics from "../../components/Overview/Analytics";
 import BusinessCenter from "../../components/Overview/BusinessCenter";
 import CatalogSync from "../../components/Overview/CatalogSync";
 import PageTitle from "../../components/PageTitle";
-import { OnboardedState } from "../../interfaces/interfaces";
-import { onboardStateApi } from "../../services";
+import { OnboardedState } from "../../interfaces/state";
+import onboardStateApi from "../../services/onboardState";
 
 const Overview: React.FC = () => {
     const router = useHistory();

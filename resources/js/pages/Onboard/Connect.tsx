@@ -13,8 +13,8 @@ import { useConnectPopup } from "../../hooks/useConnectPopup";
 import { useExchangeAuthCode } from "../../hooks/useExchangeAuthCode";
 import useNextStepRedirect from "../../hooks/useNextStepRedirect";
 import { useStatusPoller } from "../../hooks/useStatusPoller";
-import { OnboardedState } from "../../interfaces/interfaces";
-import { onboardStateApi } from "../../services";
+import { OnboardedState } from "../../interfaces/state";
+import onboardStateApi from "../../services/onboardState";
 import config from "../../utils/config";
 
 const Connect: React.FC = () => {

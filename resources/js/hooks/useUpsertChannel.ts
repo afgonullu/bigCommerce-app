@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { onboardStateApi } from "../services";
 import channelsApi from "../services/channels";
+import onboardStateApi from "../services/onboardState";
 import scriptsApi from "../services/scripts";
 
 const useUpsertChannel = () => {

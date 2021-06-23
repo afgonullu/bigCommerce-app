@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import { useEffect, useState } from "react";
-import { onboardStateApi } from "../services";
+import onboardStateApi from "../services/onboardState";
 
 export function useStatusPoller() {
     const [enabled, setIsEnabled] = useState(false);

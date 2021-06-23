@@ -22777,15 +22777,13 @@ var big_design_theme_1 = __webpack_require__(/*! @bigcommerce/big-design-theme *
 
 var styled_components_1 = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 
-var Products_1 = __importDefault(__webpack_require__(/*! ./pages/Products */ "./resources/js/pages/Products.tsx"));
-
-var ProductDetails_1 = __importDefault(__webpack_require__(/*! ./pages/ProductDetails */ "./resources/js/pages/ProductDetails.tsx"));
-
 var Onboard_1 = __importDefault(__webpack_require__(/*! ./pages/Onboard/Onboard */ "./resources/js/pages/Onboard/Onboard.tsx"));
 
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 
 var Overview_1 = __importDefault(__webpack_require__(/*! ./pages/Overview/Overview */ "./resources/js/pages/Overview/Overview.tsx"));
+
+var useAlertsManager_1 = __webpack_require__(/*! ./hooks/useAlertsManager */ "./resources/js/hooks/useAlertsManager.ts");
 
 exports.queryClient = new react_query_1.QueryClient({
   defaultOptions: {
@@ -22802,6 +22800,7 @@ var AppGlobalStyles = styled_components_1.createGlobalStyle(templateObject_1 || 
 });
 
 var App = function App() {
+  var alertsManager = useAlertsManager_1.useAlertsManager();
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(big_design_1.Box, {
     marginHorizontal: "xxxLarge",
     marginVertical: "xxLarge"
@@ -22809,682 +22808,22 @@ var App = function App() {
     client: exports.queryClient
   }, react_1["default"].createElement(styled_components_1.ThemeProvider, {
     theme: theme
-  }, react_1["default"].createElement(AppGlobalStyles, null), react_1["default"].createElement(big_design_1.GlobalStyles, null), react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
+  }, react_1["default"].createElement(AppGlobalStyles, null), react_1["default"].createElement(big_design_1.GlobalStyles, null), react_1["default"].createElement(big_design_1.AlertsManager, {
+    manager: alertsManager
+  }), react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(react_router_dom_1.Switch, null, react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/overview",
     component: Overview_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
     path: "/onboard",
     component: Onboard_1["default"]
   }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/products",
-    component: Products_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
-    path: "/products/:id",
-    component: ProductDetails_1["default"]
-  }), react_1["default"].createElement(react_router_dom_1.Route, {
+    path: "/",
     component: Onboard_1["default"]
   })))))));
 };
 
 react_dom_1["default"].render(react_1["default"].createElement(App, null), document.getElementById("root"));
 var templateObject_1;
-
-/***/ }),
-
-/***/ "./resources/js/components/Form.tsx":
-/*!******************************************!*\
-  !*** ./resources/js/components/Form.tsx ***!
-  \******************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __rest = this && this.__rest || function (s, e) {
-  var t = {};
-
-  for (var p in s) {
-    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-  }
-
-  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-    if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
-  }
-  return t;
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
-
-var FormErrors = {
-  name: "Product name is required",
-  price: "Default price is required"
-};
-
-var Form = function Form(_a) {
-  var formData = _a.formData,
-      onCancel = _a.onCancel,
-      onSubmit = _a.onSubmit;
-  var description = formData.description,
-      isVisible = formData.isVisible,
-      name = formData.name,
-      price = formData.price,
-      type = formData.type;
-
-  var _b = react_1.useState({
-    description: description,
-    isVisible: isVisible,
-    name: name,
-    price: price,
-    type: type
-  }),
-      form = _b[0],
-      setForm = _b[1];
-
-  var _c = react_1.useState({}),
-      errors = _c[0],
-      setErrors = _c[1];
-
-  var handleChange = function handleChange(event) {
-    var _a = event === null || event === void 0 ? void 0 : event.target,
-        formName = _a.name,
-        value = _a.value;
-
-    setForm(function (prevForm) {
-      var _a;
-
-      return __assign(__assign({}, prevForm), (_a = {}, _a[formName] = value, _a));
-    }); // Add error if it exists in FormErrors and the input is empty, otherwise remove from errors
-
-    !value && FormErrors[formName] ? setErrors(function (prevErrors) {
-      var _a;
-
-      return __assign(__assign({}, prevErrors), (_a = {}, _a[formName] = FormErrors[formName], _a));
-    }) : setErrors(function (_a) {
-      var _b = formName,
-          removed = _a[_b],
-          prevErrors = __rest(_a, [_typeof(_b) === "symbol" ? _b : _b + ""]);
-
-      return __assign({}, prevErrors);
-    });
-  };
-
-  var handleSelectChange = function handleSelectChange(value) {
-    setForm(function (prevForm) {
-      return __assign(__assign({}, prevForm), {
-        type: value
-      });
-    });
-  };
-
-  var handleCheckboxChange = function handleCheckboxChange(event) {
-    var _a = event === null || event === void 0 ? void 0 : event.target,
-        checked = _a.checked,
-        formName = _a.name;
-
-    setForm(function (prevForm) {
-      var _a;
-
-      return __assign(__assign({}, prevForm), (_a = {}, _a[formName] = checked, _a));
-    });
-  };
-
-  var handleSubmit = function handleSubmit(event) {
-    event.preventDefault(); // If there are errors, do not submit the form
-
-    var hasErrors = Object.keys(errors).length > 0;
-    if (hasErrors) return;
-    onSubmit(form);
-  };
-
-  return react_1["default"].createElement(big_design_1.Form, {
-    onSubmit: handleSubmit
-  }, react_1["default"].createElement(big_design_1.Panel, {
-    header: "Basic Information"
-  }, react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input, {
-    error: errors === null || errors === void 0 ? void 0 : errors.name,
-    label: "Product name",
-    name: "name",
-    required: true,
-    value: form.name,
-    onChange: handleChange
-  })), react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Select, {
-    label: "Product type",
-    name: "type",
-    options: [{
-      value: "physical",
-      content: "Physical"
-    }, {
-      value: "digital",
-      content: "Digital"
-    }],
-    required: true,
-    value: form.type,
-    onOptionChange: handleSelectChange
-  })), react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Input, {
-    error: errors === null || errors === void 0 ? void 0 : errors.price,
-    iconLeft: "$",
-    label: "Default price (excluding tax)",
-    name: "price",
-    placeholder: "10.00",
-    required: true,
-    type: "number",
-    step: "0.01",
-    value: form.price,
-    onChange: handleChange
-  })), react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Checkbox, {
-    name: "isVisible",
-    checked: form.isVisible,
-    onChange: handleCheckboxChange,
-    label: "Visible on storefront"
-  }))), react_1["default"].createElement(big_design_1.Panel, {
-    header: "Description"
-  }, react_1["default"].createElement(big_design_1.FormGroup, null, react_1["default"].createElement(big_design_1.Textarea, {
-    label: "Description",
-    name: "description",
-    placeholder: "Product info",
-    value: form.description,
-    onChange: handleChange
-  }))), react_1["default"].createElement(big_design_1.Flex, {
-    justifyContent: "flex-end"
-  }, react_1["default"].createElement(big_design_1.Button, {
-    marginRight: "medium",
-    type: "button",
-    variant: "subtle",
-    onClick: onCancel
-  }, "Cancel"), react_1["default"].createElement(big_design_1.Button, {
-    type: "submit"
-  }, "Save")));
-};
-
-exports.default = Form;
-
-/***/ }),
-
-/***/ "./resources/js/components/Header.tsx":
-/*!********************************************!*\
-  !*** ./resources/js/components/Header.tsx ***!
-  \********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-var _a;
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.TabRoutes = exports.TabIds = void 0;
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
-
-var InnerHeader_1 = __importDefault(__webpack_require__(/*! ./InnerHeader */ "./resources/js/components/InnerHeader.tsx"));
-
-exports.TabIds = {
-  HOME: "home",
-  PRODUCTS: "products",
-  ONBOARD: "onboard"
-};
-exports.TabRoutes = (_a = {}, _a[exports.TabIds.HOME] = "/", _a[exports.TabIds.PRODUCTS] = "/products", _a[exports.TabIds.ONBOARD] = "/onboard", _a);
-var InnerRoutes = ["/products/:id"];
-var HeaderTypes = {
-  GLOBAL: "global",
-  INNER: "inner"
-};
-
-var Header = function Header() {
-  var match = react_router_dom_1.useRouteMatch();
-  var router = react_router_dom_1.useHistory();
-
-  var _a = react_1.useState(""),
-      activeTab = _a[0],
-      setActiveTab = _a[1];
-
-  var _b = react_1.useState(HeaderTypes.GLOBAL),
-      headerType = _b[0],
-      setHeaderType = _b[1];
-
-  react_1.useEffect(function () {
-    if (InnerRoutes.includes(match.path)) {
-      // Use InnerHeader if route matches inner routes
-      setHeaderType(HeaderTypes.INNER);
-    } else {
-      // Check if new route matches TabRoutes
-      var tabKey = Object.keys(exports.TabRoutes).find(function (key) {
-        return exports.TabRoutes[key] === match.path;
-      }); // Set the active tab to tabKey or set no active tab if route doesn't match (404)
-
-      setActiveTab(tabKey !== null && tabKey !== void 0 ? tabKey : "");
-      setHeaderType(HeaderTypes.GLOBAL);
-    }
-  }, [match]);
-  var items = [{
-    id: exports.TabIds.HOME,
-    title: "Home"
-  }, {
-    id: exports.TabIds.PRODUCTS,
-    title: "Products"
-  }, {
-    id: exports.TabIds.ONBOARD,
-    title: "Onboard"
-  }];
-
-  var handleTabClick = function handleTabClick(tabId) {
-    setActiveTab(tabId);
-    return router.push(exports.TabRoutes[tabId]);
-  };
-
-  if (headerType === HeaderTypes.INNER) return react_1["default"].createElement(InnerHeader_1["default"], null);
-  return react_1["default"].createElement(big_design_1.Box, {
-    marginBottom: "xxLarge"
-  }, react_1["default"].createElement(big_design_1.Tabs, {
-    activeTab: activeTab,
-    items: items,
-    onTabClick: handleTabClick
-  }));
-};
-
-exports.default = Header;
-
-/***/ }),
-
-/***/ "./resources/js/components/InnerHeader.tsx":
-/*!*************************************************!*\
-  !*** ./resources/js/components/InnerHeader.tsx ***!
-  \*************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_1 = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
-
-var index_1 = __webpack_require__(/*! ../services/index */ "./resources/js/services/index.ts");
-
-var Header_1 = __webpack_require__(/*! ./Header */ "./resources/js/components/Header.tsx");
-
-var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
-
-var big_design_icons_1 = __webpack_require__(/*! @bigcommerce/big-design-icons */ "./node_modules/@bigcommerce/big-design-icons/dist/es/index.js");
-
-var InnerHeader = function InnerHeader() {
-  var router = react_router_1.useHistory();
-  var id = react_router_1.useParams().id;
-
-  var _a = react_1.useState(""),
-      name = _a[0],
-      setName = _a[1];
-
-  var handleBackClick = function handleBackClick() {
-    return router.push(Header_1.TabRoutes[Header_1.TabIds.PRODUCTS]);
-  };
-
-  react_1.useEffect(function () {
-    var fetchData = function fetchData() {
-      return __awaiter(void 0, void 0, void 0, function () {
-        var data, name;
-
-        var _a;
-
-        return __generator(this, function (_b) {
-          switch (_b.label) {
-            case 0:
-              return [4
-              /*yield*/
-              , index_1.ApiService.getProductById(id)];
-
-            case 1:
-              data = _b.sent().data;
-              name = ((_a = data.data) !== null && _a !== void 0 ? _a : {}).name;
-              setName(name);
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-
-    fetchData();
-  }, []);
-  return react_1["default"].createElement(big_design_1.Box, {
-    marginBottom: "xxLarge"
-  }, react_1["default"].createElement(big_design_1.Button, {
-    iconLeft: react_1["default"].createElement(big_design_icons_1.ArrowBackIcon, {
-      color: "secondary50"
-    }),
-    variant: "subtle",
-    onClick: handleBackClick
-  }, react_1["default"].createElement(big_design_1.Text, {
-    bold: true,
-    color: "secondary50"
-  }, "Products")), name && react_1["default"].createElement(big_design_1.H1, null, name), react_1["default"].createElement(big_design_1.HR, {
-    color: "secondary30"
-  }));
-};
-
-exports.default = InnerHeader;
-
-/***/ }),
-
-/***/ "./resources/js/components/Loading.tsx":
-/*!*********************************************!*\
-  !*** ./resources/js/components/Loading.tsx ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
-
-var Loading = function Loading() {
-  return react_1["default"].createElement(big_design_1.Panel, null, react_1["default"].createElement(big_design_1.H3, null, "Loading..."), react_1["default"].createElement(big_design_1.Flex, {
-    justifyContent: "center",
-    alignItems: "center"
-  }, react_1["default"].createElement(big_design_1.ProgressCircle, {
-    size: "large"
-  })));
-};
-
-exports.default = Loading;
 
 /***/ }),
 
@@ -25542,6 +24881,12 @@ var __generator = this && this.__generator || function (thisArg, body) {
   }
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
@@ -25550,7 +24895,7 @@ var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var services_1 = __webpack_require__(/*! ../services */ "./resources/js/services/index.ts");
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 var routes = {
   step_requirements: "/onboard/requirements",
@@ -25570,7 +24915,7 @@ var useNextStepRedirect = function useNextStepRedirect() {
           case 0:
             return [4
             /*yield*/
-            , services_1.onboardStateApi.setOnboardedState(body)];
+            , onboardState_1["default"].setOnboardedState(body)];
 
           case 1:
             response = _a.sent();
@@ -25754,7 +25099,7 @@ var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var services_1 = __webpack_require__(/*! ../services */ "./resources/js/services/index.ts");
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 var useNextStepRedirect_1 = __importDefault(__webpack_require__(/*! ./useNextStepRedirect */ "./resources/js/hooks/useNextStepRedirect.ts"));
 
@@ -25781,7 +25126,7 @@ var useOnboardRedirect = function useOnboardRedirect() {
             case 0:
               return [4
               /*yield*/
-              , services_1.onboardStateApi.getOnboardedState()];
+              , onboardState_1["default"].getOnboardedState()];
 
             case 1:
               onboardingState = _a.sent();
@@ -26063,6 +25408,12 @@ var __generator = this && this.__generator || function (thisArg, body) {
   }
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
@@ -26072,7 +25423,7 @@ var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react
 
 var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-var services_1 = __webpack_require__(/*! ../services */ "./resources/js/services/index.ts");
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 function useStatusPoller() {
   var _this = this;
@@ -26093,7 +25444,7 @@ function useStatusPoller() {
           case 0:
             return [4
             /*yield*/
-            , services_1.onboardStateApi.getOnboardedState()];
+            , onboardState_1["default"].getOnboardedState()];
 
           case 1:
             onboardingState = _a.sent();
@@ -26299,9 +25650,9 @@ Object.defineProperty(exports, "__esModule", ({
 
 var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-var services_1 = __webpack_require__(/*! ../services */ "./resources/js/services/index.ts");
-
 var channels_1 = __importDefault(__webpack_require__(/*! ../services/channels */ "./resources/js/services/channels.ts"));
+
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 var scripts_1 = __importDefault(__webpack_require__(/*! ../services/scripts */ "./resources/js/services/scripts.ts"));
 
@@ -26314,7 +25665,7 @@ var useUpsertChannel = function useUpsertChannel() {
           case 0:
             return [4
             /*yield*/
-            , services_1.onboardStateApi.getOnboardedState()];
+            , onboardState_1["default"].getOnboardedState()];
 
           case 1:
             data = _a.sent();
@@ -26597,7 +25948,7 @@ var useNextStepRedirect_1 = __importDefault(__webpack_require__(/*! ../../hooks/
 
 var useStatusPoller_1 = __webpack_require__(/*! ../../hooks/useStatusPoller */ "./resources/js/hooks/useStatusPoller.ts");
 
-var services_1 = __webpack_require__(/*! ../../services */ "./resources/js/services/index.ts");
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 var config_1 = __importDefault(__webpack_require__(/*! ../../utils/config */ "./resources/js/utils/config.ts"));
 
@@ -26697,7 +26048,7 @@ var Connect = function Connect() {
             case 0:
               return [4
               /*yield*/
-              , services_1.onboardStateApi.getOnboardedState()];
+              , onboardState_1["default"].getOnboardedState()];
 
             case 1:
               onboardingState = _a.sent();
@@ -27590,7 +26941,7 @@ var CatalogSync_1 = __importDefault(__webpack_require__(/*! ../../components/Ove
 
 var PageTitle_1 = __importDefault(__webpack_require__(/*! ../../components/PageTitle */ "./resources/js/components/PageTitle.tsx"));
 
-var services_1 = __webpack_require__(/*! ../../services */ "./resources/js/services/index.ts");
+var onboardState_1 = __importDefault(__webpack_require__(/*! ../../services/onboardState */ "./resources/js/services/onboardState.ts"));
 
 var Overview = function Overview() {
   var router = react_router_dom_1.useHistory();
@@ -27608,7 +26959,7 @@ var Overview = function Overview() {
             case 0:
               return [4
               /*yield*/
-              , services_1.onboardStateApi.getOnboardedState()];
+              , onboardState_1["default"].getOnboardedState()];
 
             case 1:
               onboardingState = _a.sent();
@@ -27645,703 +26996,6 @@ var Overview = function Overview() {
 };
 
 exports.default = Overview;
-
-/***/ }),
-
-/***/ "./resources/js/pages/ProductDetails.tsx":
-/*!***********************************************!*\
-  !*** ./resources/js/pages/ProductDetails.tsx ***!
-  \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var services_1 = __webpack_require__(/*! ../services/ */ "./resources/js/services/index.ts");
-
-var Form_1 = __importDefault(__webpack_require__(/*! ../components/Form */ "./resources/js/components/Form.tsx"));
-
-var Header_1 = __importDefault(__webpack_require__(/*! ../components/Header */ "./resources/js/components/Header.tsx"));
-
-var Loading_1 = __importDefault(__webpack_require__(/*! ../components/Loading */ "./resources/js/components/Loading.tsx"));
-
-var ProductDetails = function ProductDetails() {
-  var router = react_router_dom_1.useHistory();
-  var id = react_router_dom_1.useParams().id;
-
-  var _a = react_1.useState(),
-      formData = _a[0],
-      setFormData = _a[1];
-
-  react_1.useEffect(function () {
-    var fetchData = function fetchData() {
-      return __awaiter(void 0, void 0, void 0, function () {
-        var data, _a, description, isVisible, name, price, type, formData;
-
-        var _b;
-
-        return __generator(this, function (_c) {
-          switch (_c.label) {
-            case 0:
-              return [4
-              /*yield*/
-              , services_1.ApiService.getProductById(id)];
-
-            case 1:
-              data = _c.sent().data;
-              _a = (_b = data.data) !== null && _b !== void 0 ? _b : {}, description = _a.description, isVisible = _a.is_visible, name = _a.name, price = _a.price, type = _a.type;
-              formData = {
-                description: description,
-                isVisible: isVisible,
-                name: name,
-                price: price,
-                type: type
-              };
-              setFormData(formData);
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-
-    fetchData();
-  }, []);
-
-  var handleCancel = function handleCancel() {
-    return router.push("/products");
-  };
-
-  var handleSubmit = function handleSubmit(data) {
-    return __awaiter(void 0, void 0, void 0, function () {
-      var error_1;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
-          case 0:
-            _a.trys.push([0, 2,, 3]);
-
-            console.log("hello");
-            return [4
-            /*yield*/
-            , services_1.ApiService.updateProduct(id, data)];
-
-          case 1:
-            _a.sent();
-
-            router.push("/products");
-            return [3
-            /*break*/
-            , 3];
-
-          case 2:
-            error_1 = _a.sent();
-            console.log("error");
-            return [3
-            /*break*/
-            , 3];
-
-          case 3:
-            return [2
-            /*return*/
-            ];
-        }
-      });
-    });
-  };
-
-  if (!formData) return react_1["default"].createElement(Loading_1["default"], null);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(Header_1["default"], null), react_1["default"].createElement(Form_1["default"], {
-    formData: formData,
-    onCancel: handleCancel,
-    onSubmit: handleSubmit
-  }));
-};
-
-exports.default = ProductDetails;
-
-/***/ }),
-
-/***/ "./resources/js/pages/Products.tsx":
-/*!*****************************************!*\
-  !*** ./resources/js/pages/Products.tsx ***!
-  \*****************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function (resolve) {
-      resolve(value);
-    });
-  }
-
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-
-var big_design_1 = __webpack_require__(/*! @bigcommerce/big-design */ "./node_modules/@bigcommerce/big-design/dist/es/index.js");
-
-var big_design_icons_1 = __webpack_require__(/*! @bigcommerce/big-design-icons */ "./node_modules/@bigcommerce/big-design-icons/dist/es/index.js");
-
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-
-var services_1 = __webpack_require__(/*! ../services/ */ "./resources/js/services/index.ts");
-
-var Loading_1 = __importDefault(__webpack_require__(/*! ../components/Loading */ "./resources/js/components/Loading.tsx"));
-
-var Header_1 = __importDefault(__webpack_require__(/*! ../components/Header */ "./resources/js/components/Header.tsx"));
-
-var Products = function Products() {
-  var router = react_router_dom_1.useHistory();
-
-  var _a = react_1.useState([]),
-      products = _a[0],
-      setProducts = _a[1];
-
-  react_1.useEffect(function () {
-    var fetchData = function fetchData() {
-      return __awaiter(void 0, void 0, void 0, function () {
-        var data, tableItems;
-        return __generator(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              return [4
-              /*yield*/
-              , services_1.ApiService.getProducts()];
-
-            case 1:
-              data = _a.sent().data;
-              tableItems = data.data.map(function (_a) {
-                var id = _a.id,
-                    inventory_level = _a.inventory_level,
-                    name = _a.name,
-                    price = _a.price;
-                return {
-                  id: id,
-                  name: name,
-                  price: price,
-                  inventory_level: inventory_level
-                };
-              });
-              setProducts(tableItems);
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-
-    fetchData();
-  }, []);
-
-  var renderName = function renderName(id, name) {
-    return react_1["default"].createElement(react_router_dom_1.Link, {
-      to: "/products/" + id
-    }, name);
-  };
-
-  var renderPrice = function renderPrice(price) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD"
-    }).format(price);
-  };
-
-  var renderStock = function renderStock(inventory_level) {
-    return inventory_level > 0 ? react_1["default"].createElement(big_design_1.Small, null, inventory_level) : react_1["default"].createElement(big_design_1.Small, {
-      bold: true,
-      marginBottom: "none",
-      color: "danger"
-    }, "0");
-  };
-
-  var renderAction = function renderAction(id) {
-    return react_1["default"].createElement(big_design_1.Dropdown, {
-      items: [{
-        content: "Edit product",
-        onItemClick: function onItemClick() {
-          return router.push("/products/" + id);
-        },
-        hash: "edit"
-      }],
-      toggle: react_1["default"].createElement(big_design_1.Button, {
-        iconOnly: react_1["default"].createElement(big_design_icons_1.MoreHorizIcon, {
-          color: "secondary60"
-        }),
-        variant: "subtle"
-      })
-    });
-  };
-
-  if (!products) return react_1["default"].createElement(Loading_1["default"], null);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(Header_1["default"], null), react_1["default"].createElement(big_design_1.Panel, null, react_1["default"].createElement(big_design_1.StatefulTable, {
-    columns: [{
-      header: "Product name",
-      hash: "name",
-      render: function render(_a) {
-        var id = _a.id,
-            name = _a.name;
-        return renderName(id, name);
-      },
-      sortKey: "name"
-    }, {
-      header: "Stock",
-      hash: "inventory_level",
-      render: function render(_a) {
-        var inventory_level = _a.inventory_level;
-        return renderStock(inventory_level);
-      },
-      sortKey: "inventory_level"
-    }, {
-      header: "Price",
-      hash: "price",
-      render: function render(_a) {
-        var price = _a.price;
-        return renderPrice(price);
-      },
-      sortKey: "price"
-    }, {
-      header: "Action",
-      hideHeader: true,
-      hash: "id",
-      render: function render(_a) {
-        var id = _a.id;
-        return renderAction(id);
-      },
-      sortKey: "id"
-    }],
-    items: products,
-    itemName: "Products",
-    stickyHeader: true
-  })));
-};
-
-exports.default = Products;
-
-/***/ }),
-
-/***/ "./resources/js/services/ApiService.ts":
-/*!*********************************************!*\
-  !*** ./resources/js/services/ApiService.ts ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-
-var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/index.js"));
-
-var ApiService = {
-  updateProduct: function updateProduct(id, data) {
-    return axios_1["default"]({
-      method: "put",
-      url: "/bc-api/v3/catalog/products/" + id,
-      data: data
-    });
-  },
-  getProductById: function getProductById(id) {
-    return axios_1["default"]({
-      method: "get",
-      url: "/bc-api/v3/catalog/products/" + id
-    });
-  },
-  getProducts: function getProducts() {
-    return axios_1["default"]({
-      method: "get",
-      url: "/bc-api/v3/catalog/products?limit=11"
-    });
-  },
-  getSummary: function getSummary() {
-    return axios_1["default"]({
-      method: "get",
-      url: "/bc-api/v3/catalog/summary"
-    });
-  }
-};
-exports.default = ApiService;
 
 /***/ }),
 
@@ -28634,36 +27288,6 @@ var channelsApi = {
   }
 };
 exports.default = channelsApi;
-
-/***/ }),
-
-/***/ "./resources/js/services/index.ts":
-/*!****************************************!*\
-  !*** ./resources/js/services/index.ts ***!
-  \****************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.onboardStateApi = exports.ApiService = void 0;
-
-var ApiService_1 = __importDefault(__webpack_require__(/*! ./ApiService */ "./resources/js/services/ApiService.ts"));
-
-exports.ApiService = ApiService_1["default"];
-
-var onboardState_1 = __importDefault(__webpack_require__(/*! ./onboardState */ "./resources/js/services/onboardState.ts"));
-
-exports.onboardStateApi = onboardState_1["default"];
 
 /***/ }),
 
@@ -29235,10 +27859,12 @@ var _startcheckout_template_1 = __webpack_require__(/*! ../../scripts/storefront
 
 var _viewcontent_template_1 = __webpack_require__(/*! ../../scripts/storefront/_viewcontent.template */ "./resources/scripts/storefront/_viewcontent.template.ts");
 
+var config_1 = __importDefault(__webpack_require__(/*! ../utils/config */ "./resources/js/utils/config.ts"));
+
 var scriptsApi = {
   installStorefrontScripts: function installStorefrontScripts() {
     return __awaiter(this, void 0, void 0, function () {
-      var integrationState, scriptTags, addedScripts, _i, scriptTags_1, script, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
+      var integrationState, scriptTags, existingScripts, addedScripts, _loop_1, _i, scriptTags_1, script;
 
       return __generator(this, function (_a) {
         switch (_a.label) {
@@ -29286,46 +27912,83 @@ var scriptsApi = {
               visibility: "order_confirmation",
               template: _ordercomplete_template_1.orderComplete
             }];
-            addedScripts = [];
-            _i = 0, scriptTags_1 = scriptTags;
-            _a.label = 2;
-
-          case 2:
-            if (!(_i < scriptTags_1.length)) return [3
-            /*break*/
-            , 5];
-            script = scriptTags_1[_i];
-            templateHTML = script.template;
-            scriptHTML = templateHTML.replace(/<%= property_id %>/g, integrationState.platformAnalyticsId);
-            scriptCreateRequest = {
-              channel_id: integrationState.storefrontChannelId,
-              name: script.name,
-              description: script.description,
-              html: scriptHTML,
-              auto_uninstall: true,
-              load_method: "default",
-              location: script.location,
-              visibility: script.visibility,
-              kind: "script_tag",
-              consent_category: "analytics",
-              enabled: true
-            };
             return [4
             /*yield*/
-            , axios_1["default"].post("/bc-api/v3/content/scripts", scriptCreateRequest)];
+            , axios_1["default"].get("/bc-api/v3/content/scripts?channel_id=" + integrationState.managedChannelId + "&api_client_id=" + config_1["default"].CLIENT_ID)];
+
+          case 2:
+            existingScripts = _a.sent().data;
+            addedScripts = [];
+
+            _loop_1 = function _loop_1(script) {
+              var filteredScriptsList, templateHTML, scriptHTML, scriptCreateRequest, scriptCreateResponse;
+              return __generator(this, function (_b) {
+                switch (_b.label) {
+                  case 0:
+                    filteredScriptsList = existingScripts.filter(function (x) {
+                      return x.name === script.name;
+                    }); // If there is already a script with the same name added by this app, return it instead of creating another one
+
+                    if (filteredScriptsList.length > 0) {
+                      addedScripts.push(filteredScriptsList[0]);
+                      return [2
+                      /*return*/
+                      , "continue"];
+                    }
+
+                    templateHTML = script.template;
+                    scriptHTML = templateHTML.replace(/<%= property_id %>/g, integrationState.platformAnalyticsId);
+                    scriptCreateRequest = {
+                      channel_id: integrationState.storefrontChannelId,
+                      name: script.name,
+                      description: script.description,
+                      html: scriptHTML,
+                      auto_uninstall: true,
+                      load_method: "default",
+                      location: script.location,
+                      visibility: script.visibility,
+                      kind: "script_tag",
+                      consent_category: "analytics",
+                      enabled: true
+                    };
+                    return [4
+                    /*yield*/
+                    , axios_1["default"].post("/bc-api/v3/content/scripts", scriptCreateRequest)];
+
+                  case 1:
+                    scriptCreateResponse = _b.sent().data;
+                    addedScripts.push(scriptCreateResponse);
+                    return [2
+                    /*return*/
+                    ];
+                }
+              });
+            };
+
+            _i = 0, scriptTags_1 = scriptTags;
+            _a.label = 3;
 
           case 3:
-            scriptCreateResponse = _a.sent().data;
-            addedScripts.push(scriptCreateResponse);
-            _a.label = 4;
+            if (!(_i < scriptTags_1.length)) return [3
+            /*break*/
+            , 6];
+            script = scriptTags_1[_i];
+            return [5
+            /*yield**/
+            , _loop_1(script)];
 
           case 4:
+            _a.sent();
+
+            _a.label = 5;
+
+          case 5:
             _i++;
             return [3
             /*break*/
-            , 2];
+            , 3];
 
-          case 5:
+          case 6:
             return [2
             /*return*/
             , addedScripts];

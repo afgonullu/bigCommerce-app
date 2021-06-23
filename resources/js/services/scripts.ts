@@ -8,6 +8,7 @@ import { initialize } from "../../scripts/storefront/_initialize.template";
 import { orderComplete } from "../../scripts/storefront/_ordercomplete.template";
 import { startCheckout } from "../../scripts/storefront/_startcheckout.template";
 import { viewContent } from "../../scripts/storefront/_viewcontent.template";
+import config from "../utils/config";
 
 const scriptsApi = {
     async installStorefrontScripts() {
@@ -57,21 +58,21 @@ const scriptsApi = {
             },
         ];
 
-        // const { data: existingScripts }: { data: Script[] } = await axios.get(
-        //     `/bc-api/v3/content/scripts?channel_id=${integrationState.managedChannelId}&api_client_id=${config.CLIENT_ID}`
-        // );
+        const { data: existingScripts }: { data: Script[] } = await axios.get(
+            `/bc-api/v3/content/scripts?channel_id=${integrationState.managedChannelId}&api_client_id=${config.CLIENT_ID}`
+        );
 
         const addedScripts: Script[] = [];
         for (const script of scriptTags) {
-            // const filteredScriptsList = existingScripts.filter(
-            //     (x) => x.name === script.name
-            // );
+            const filteredScriptsList = existingScripts.filter(
+                (x) => x.name === script.name
+            );
 
-            // // If there is already a script with the same name added by this app, return it instead of creating another one
-            // if (filteredScriptsList.length > 0) {
-            //     addedScripts.push(filteredScriptsList[0]);
-            //     continue;
-            // }
+            // If there is already a script with the same name added by this app, return it instead of creating another one
+            if (filteredScriptsList.length > 0) {
+                addedScripts.push(filteredScriptsList[0]);
+                continue;
+            }
 
             const templateHTML = script.template;
 

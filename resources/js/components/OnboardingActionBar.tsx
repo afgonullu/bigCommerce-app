@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import { OnboardedState } from "../interfaces/interfaces";
+import { OnboardedState } from "../interfaces/state";
 import { useOnboardingSteps } from "../hooks/useOnboardingSteps";
 import useNextStepRedirect from "../hooks/useNextStepRedirect";
 import useUpsertChannel from "../hooks/useUpsertChannel";

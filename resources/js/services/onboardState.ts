@@ -1,5 +1,5 @@
 import axios from "axios";
-import { OnboardedState } from "../interfaces/interfaces";
+import { OnboardedState } from "../interfaces/state";
 
 const onboardStateApi = {
     async getOnboardedState() {

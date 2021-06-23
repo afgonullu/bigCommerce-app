@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { OnboardedState, OnboardedStatus } from "../interfaces/interfaces";
-import { onboardStateApi } from "../services";
+import { OnboardedState, OnboardedStatus } from "../interfaces/state";
+import onboardStateApi from "../services/onboardState";
 
 const routes: Record<OnboardedStatus, string> = {
     step_requirements: "/onboard/requirements",

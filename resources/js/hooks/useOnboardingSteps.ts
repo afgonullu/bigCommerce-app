@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { OnboardedStatus } from "../interfaces/interfaces";
+import { OnboardedStatus } from "../interfaces/state";
 
 export function useOnboardingSteps() {
     const steps = useMemo(

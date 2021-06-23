@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useCallback } from "react";
-import { OnboardedState } from "../interfaces/interfaces";
+import { OnboardedState } from "../interfaces/state";
 
 export function useExchangeAuthCode() {
     return useCallback(async (code) => {
